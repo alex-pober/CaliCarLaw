@@ -1,54 +1,76 @@
+import WhyChooseUs from './components/WhyChooseUs';
+import OurServices from './components/OurServices';
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        {/* <div className="font-extrabold md:text-4xl [text-wrap:balance]">
-          Your Trusted Legal Team for{" "}
-          <span className="text-indigo-500 inline-flex flex-col h-[calc(theme(fontSize.3xl)*theme(lineHeight.tight))] md:h-[calc(theme(fontSize.4xl)*theme(lineHeight.tight))] overflow-hidden">
-            <ul className="block animate-text-slide-4 text-left leading-tight [&_li]:block">
-              <li>Car Accidents</li>
-              <li>DUI</li>
-              <li>Traffic Tickets</li>
-              <li>Lemon Law</li>
-              <li aria-hidden="true">Car Accidents</li>
-            </ul>
-          </span>
-        </div> */}
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+      <main className="flex flex-col">
+        <div className="p-8 pb-20 sm:p-20">
+          <div className="flex flex-col gap-8 items-center sm:items-start max-w-7xl mx-auto">
+            {/* Hero content */}
+            <div className="font-extrabold text-5xl [text-wrap:balance]">
+              Your Trusted Legal Team for{" "}
+              <span className="text-indigo-500 inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] overflow-hidden">
+                <ul className="block animate-text-slide-4 text-left leading-tight [&_li]:block">
+                  <li>Car Accidents</li>
+                  <li>DUI</li>
+                  <li>Traffic Tickets</li>
+                  <li>Lemon Law</li>
+                  <li aria-hidden="true">Car Accidents</li>
+                </ul>
+              </span>
+            </div>
 
-        <div className="font-extrabold text-5xl [text-wrap:balance]">
-          Your Trusted Legal Team for{" "}
-          <span className="text-indigo-500 inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] overflow-hidden">
-            <ul className="block animate-text-slide-4 text-left leading-tight [&_li]:block">
-              <li>Car Accidents</li>
-              <li>DUI</li>
-              <li>Traffic Tickets</li>
-              <li>Lemon Law</li>
-              <li aria-hidden="true">Car Accidents</li>
-            </ul>
-          </span>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl text-center sm:text-left leading-relaxed">
+              Revolutionizing Legal Services with AI-Powered Efficiency—
+              <span className="text-indigo-500 font-semibold">
+                Outperforming Traditional Firms
+              </span>{" "}
+              for Results You Deserve.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
+              <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-indigo-500 text-white gap-2 hover:bg-indigo-600 text-base h-12 px-8 font-medium w-full sm:w-auto">
+                Get a Free Case Evaluation
+              </button>
+              <p className="text-sm text-center sm:text-left text-gray-600 dark:text-gray-400">
+                Available 24/7. Let&apos;s Win Together!
+              </p>
+            </div>
+            
+            {/* this is the gradient */}
+            <div className="absolute top-[60%] left-0 right-0 -translate-y-1/2 -z-10 overflow-hidden">
+              <svg
+                className="w-[200%] md:w-full h-96 translate-x-[-25%] md:translate-x-0"
+                viewBox="0 0 1440 250"
+                fill="none"
+                preserveAspectRatio="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M0,150 C240,70 480,70 720,150 C960,230 1200,230 1440,150 C1440,150 1440,0 1440,0 C960,50 480,50 0,0 Z"
+                  fill="url(#gradient)"
+                  className="opacity-10"
+                />
+                <defs>
+                  <linearGradient id="gradient" x1="0" y1="0" x2="1440" y2="0">
+                    <stop offset="0%" stopColor="#6366f1" />
+                    <stop offset="50%" stopColor="#818cf8" />
+                    <stop offset="100%" stopColor="#6366f1" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          </div>
         </div>
 
-        <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl text-center sm:text-left leading-relaxed">
-          Revolutionizing Legal Services with AI-Powered Efficiency—
-          <span className="text-indigo-500 font-semibold">
-            Outperforming Traditional Firms
-          </span>{" "}
-          for Results You Deserve.
-        </p>
+        <OurServices />
 
-        <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-          <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-indigo-500 text-white gap-2 hover:bg-indigo-600 text-base h-12 px-8 font-medium w-full sm:w-auto">
-            Get a Free Case Evaluation
-          </button>
-          <p className="text-sm text-center sm:text-left text-gray-600 dark:text-gray-400">
-            Available 24/7. Let&apos;s Win Together!
-          </p>
-        </div>
-
+        <WhyChooseUs />
+        
       </main>
 
-      <footer className="row-start-3 flex flex-col gap-6 items-center justify-center w-full">
+      <footer className="flex flex-col gap-6 items-center justify-center w-full">
         <nav className="flex gap-6 flex-wrap items-center justify-center text-sm text-gray-600 dark:text-gray-400">
           <a href="/about" className="hover:text-indigo-500 transition-colors">
             About Us
