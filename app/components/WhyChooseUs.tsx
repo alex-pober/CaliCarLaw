@@ -25,7 +25,7 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="w-full bg-indigo-50">
+    <section className="w-full bg-[#50ade4]/5">
       <div className="py-16 px-4 w-full max-w-7xl mx-auto">
         <h2 className="text-2xl sm:text-3xl font-bold text-center mb-6 sm:mb-8 text-gray-900">What Sets Us Apart</h2>
         
@@ -36,7 +36,7 @@ export default function WhyChooseUs() {
               className="flex flex-col items-center text-center p-2 sm:p-4 rounded-lg hover:bg-white/50 transition-colors"
             >
               <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white flex items-center justify-center mb-2 sm:mb-3">
-                <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" />
+                <feature.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#50ade4]" />
               </div>
               <h3 className="font-semibold text-base sm:text-lg mb-1 text-gray-900">{feature.title}</h3>
               <p className="text-gray-600 text-sm sm:text-base">{feature.description}</p>

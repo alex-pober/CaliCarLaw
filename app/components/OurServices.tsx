@@ -32,7 +32,7 @@ export default function OurServices() {
             <h2 className="text-center text-2xl font-bold md:text-left md:text-4xl">
               All services we<br /> can provide for you
             </h2>
-            {/* <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-indigo-50 h-11 rounded-md px-8">
+            {/* <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#50ade4] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-[#50ade4]/10 h-11 rounded-md px-8">
               View All Services
             </button> */}
           </div>
@@ -41,8 +41,8 @@ export default function OurServices() {
             {services.map((service, index) => (
               <div key={index} className="rounded-xl border bg-gray-50/50 p-6">
                 <div className="mb-6">
-                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-lg bg-indigo-100">
-                    <service.icon className="h-8 w-8 text-indigo-600" />
+                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-lg bg-[#50ade4]/10">
+                    <service.icon className="h-8 w-8 text-[#50ade4]" />
                   </div>
                 </div>
                 <h4 className="mb-4 text-xl font-semibold md:text-2xl">

@@ -7,7 +7,7 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="text-3xl font-extrabold text-indigo-600">
+            <a href="/" className="text-3xl font-extrabold text-[#50ade4]">
               CaliCarLaw
             </a>
           </div>
@@ -21,13 +21,13 @@ export default function Navbar() {
           <div className="flex items-center gap-4 sm:gap-6">
             <a 
               href="tel:+18885555555" 
-              className="hidden sm:flex items-center gap-1 text-gray-600 hover:text-indigo-600 transition-colors"
+              className="hidden sm:flex items-center gap-1 text-gray-600 hover:text-[#50ade4] transition-colors"
             >
               <Phone className="h-4 w-4" />
               <span className="font-medium">(888) 555-5555</span>
             </a>
             
-            <button className="rounded-full border border-solid border-transparent bg-indigo-500 text-white hover:bg-indigo-600 transition-colors text-sm px-4 h-9 font-medium whitespace-nowrap">
+            <button className="rounded-full border border-solid border-transparent bg-[#50ade4] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium whitespace-nowrap">
               Free Consultation
             </button>
           </div>

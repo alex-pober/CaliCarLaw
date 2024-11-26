@@ -13,7 +13,7 @@ export default function Home() {
             {/* Right side - Lady of Justice Image */}
             <div className="absolute right-0 w-full md:w-[60%] aspect-square max-w-[600px] opacity-20 md:opacity-100">
               <Image
-                src="/images/hero/lady-of-justice.png"
+                src="/images/hero/lady-of-justice2.png"
                 alt="Lady of Justice statue symbolizing law and justice"
                 fill
                 className="object-contain"
@@ -25,7 +25,7 @@ export default function Home() {
             <div className="relative z-10 flex flex-col gap-8 items-center sm:items-start md:max-w-[60%]">
               <div className="font-extrabold text-5xl [text-wrap:balance]">
                 Your Trusted Legal Team for{" "}
-                <span className="text-indigo-500 inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] overflow-hidden">
+                <span className="text-[#50ade4] inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] overflow-hidden">
                   <ul className="block animate-text-slide-4 text-left leading-tight [&_li]:block">
                     <li>Car Accidents</li>
                     <li>DUI</li>
@@ -38,14 +38,14 @@ export default function Home() {
 
               <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl text-center sm:text-left leading-relaxed">
                 Revolutionizing Legal Services with AI-Powered Efficiency—
-                <span className="text-indigo-500 font-semibold">
+                <span className="text-[#50ade4] font-semibold">
                   Outperforming Traditional Firms
                 </span>{" "}
                 for Results You Deserve.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-                <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-indigo-500 text-white gap-2 hover:bg-indigo-600 text-base h-12 px-8 font-medium w-full sm:w-auto">
+                <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-[#50ade4] text-white gap-2 hover:bg-[#3d99d0] text-base h-12 px-8 font-medium w-full sm:w-auto">
                   Get a Free Case Evaluation
                 </button>
                 <p className="text-sm text-center sm:text-left text-gray-600 dark:text-gray-400">
@@ -64,31 +64,31 @@ export default function Home() {
 
       <footer className="flex flex-col gap-6 items-center justify-center w-full py-16">
         <nav className="flex gap-6 flex-wrap items-center justify-center text-sm text-gray-600 dark:text-gray-400">
-          <a href="/about" className="hover:text-indigo-500 transition-colors">
+          <a href="/about" className="hover:text-[#50ade4] transition-colors">
             About Us
           </a>
           <span className="select-none">•</span>
           <a
             href="/services"
-            className="hover:text-indigo-500 transition-colors"
+            className="hover:text-[#50ade4] transition-colors"
           >
             Services
           </a>
           <span className="select-none">•</span>
           <a
             href="/testimonials"
-            className="hover:text-indigo-500 transition-colors"
+            className="hover:text-[#50ade4] transition-colors"
           >
             Testimonials
           </a>
           <span className="select-none">•</span>
-          <a href="/blog" className="hover:text-indigo-500 transition-colors">
+          <a href="/blog" className="hover:text-[#50ade4] transition-colors">
             Blog
           </a>
           <span className="select-none">•</span>
           <a
             href="/contact"
-            className="hover:text-indigo-500 transition-colors"
+            className="hover:text-[#50ade4] transition-colors"
           >
             Contact Us
           </a>
@@ -97,7 +97,7 @@ export default function Home() {
         <div className="flex gap-6 items-center justify-center">
           <a
             href="#"
-            className="text-gray-600 hover:text-indigo-500 transition-colors"
+            className="text-gray-600 hover:text-[#50ade4] transition-colors"
             aria-label="LinkedIn"
           >
             <svg
@@ -111,7 +111,7 @@ export default function Home() {
           </a>
           <a
             href="#"
-            className="text-gray-600 hover:text-indigo-500 transition-colors"
+            className="text-gray-600 hover:text-[#50ade4] transition-colors"
             aria-label="Instagram"
           >
             <svg
@@ -129,7 +129,7 @@ export default function Home() {
           </a>
           <a
             href="#"
-            className="text-gray-600 hover:text-indigo-500 transition-colors"
+            className="text-gray-600 hover:text-[#50ade4] transition-colors"
             aria-label="Facebook"
           >
             <svg
