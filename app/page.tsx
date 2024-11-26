@@ -1,9 +1,11 @@
 import WhyChooseUs from './components/WhyChooseUs';
 import OurServices from './components/OurServices';
+import Navbar from './components/Navbar';
 
 export default function Home() {
   return (
     <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+      <Navbar />
       <main className="flex flex-col">
         <div className="p-8 pb-20 sm:p-20">
           <div className="flex flex-col gap-8 items-center sm:items-start max-w-7xl mx-auto">
@@ -38,7 +40,7 @@ export default function Home() {
               </p>
             </div>
             
-            {/* this is the gradient */}
+            {/* this is the gradient
             <div className="absolute top-[60%] left-0 right-0 -translate-y-1/2 -z-10 overflow-hidden">
               <svg
                 className="w-[200%] md:w-full h-96 translate-x-[-25%] md:translate-x-0"
@@ -61,6 +63,8 @@ export default function Home() {
                 </defs>
               </svg>
             </div>
+            {/* this is the gradient */}  
+            
           </div>
         </div>
 
@@ -70,7 +74,7 @@ export default function Home() {
         
       </main>
 
-      <footer className="flex flex-col gap-6 items-center justify-center w-full">
+      <footer className="flex flex-col gap-6 items-center justify-center w-full py-16">
         <nav className="flex gap-6 flex-wrap items-center justify-center text-sm text-gray-600 dark:text-gray-400">
           <a href="/about" className="hover:text-indigo-500 transition-colors">
             About Us

@@ -25,40 +25,37 @@ const services = [
 
 export default function OurServices() {
   return (
-    <section className="w-full">
-      <div className="py-16 px-4 w-full max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">How We Can Help</h2>
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {services.map((service, index) => (
-          <div 
-            key={index}
-            className="group relative overflow-hidden rounded-2xl bg-white p-6 shadow-lg transition-all hover:shadow-xl"
-          >
-            <div className="mb-4">
-              <div className="inline-block rounded-lg bg-indigo-100 p-3">
-                <service.icon className="h-6 w-6 text-indigo-600" />
-              </div>
-            </div>
-            <h3 className="mb-2 text-lg font-semibold text-gray-900">
-              {service.title}
-            </h3>
-            <p className="text-gray-600">
-              {service.description}
-            </p>
-            <div className="absolute inset-0 rounded-2xl ring-1 ring-inset ring-gray-900/10 group-hover:ring-gray-900/20" />
+    <section className="py-16">
+      <div className="container mx-auto px-4">
+        <div className="mx-auto max-w-screen-xl">
+          <div className="flex flex-col items-center justify-between gap-y-4 md:flex-row">
+            <h2 className="text-center text-2xl font-bold md:text-left md:text-4xl">
+              All services we<br /> can provide for you
+            </h2>
+            {/* <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-indigo-50 h-11 rounded-md px-8">
+              View All Services
+            </button> */}
           </div>
-        ))}
-      </div>
 
-      <div className="mt-12 text-center">
-        <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-indigo-500 text-white gap-2 hover:bg-indigo-600 text-base h-12 px-8 font-medium mx-auto">
-          Learn More About Our Expertise
-        </button>
+          <div className="mt-16 grid gap-6 md:mt-24 md:grid-cols-2 lg:grid-cols-4">
+            {services.map((service, index) => (
+              <div key={index} className="rounded-xl border bg-gray-50/50 p-6">
+                <div className="mb-6">
+                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-lg bg-indigo-100">
+                    <service.icon className="h-8 w-8 text-indigo-600" />
+                  </div>
+                </div>
+                <h4 className="mb-4 text-xl font-semibold md:text-2xl">
+                  {service.title}
+                </h4>
+                <p className="text-lg text-gray-600">
+                  {service.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
     </section>
   );
 }
