@@ -1,6 +1,7 @@
 import WhyChooseUs from './components/WhyChooseUs';
 import OurServices from './components/OurServices';
 import Navbar from './components/Navbar';
+import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -8,63 +9,50 @@ export default function Home() {
       <Navbar />
       <main className="flex flex-col">
         <div className="p-8 pb-20 sm:p-20">
-          <div className="flex flex-col gap-8 items-center sm:items-start max-w-7xl mx-auto">
-            {/* Hero content */}
-            <div className="font-extrabold text-5xl [text-wrap:balance]">
-              Your Trusted Legal Team for{" "}
-              <span className="text-indigo-500 inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] overflow-hidden">
-                <ul className="block animate-text-slide-4 text-left leading-tight [&_li]:block">
-                  <li>Car Accidents</li>
-                  <li>DUI</li>
-                  <li>Traffic Tickets</li>
-                  <li>Lemon Law</li>
-                  <li aria-hidden="true">Car Accidents</li>
-                </ul>
-              </span>
+          <div className="relative max-w-7xl mx-auto">
+            {/* Right side - Lady of Justice Image */}
+            <div className="absolute right-0 w-full md:w-[60%] aspect-square max-w-[600px] opacity-20 md:opacity-100">
+              <Image
+                src="/images/hero/lady-of-justice.png"
+                alt="Lady of Justice statue symbolizing law and justice"
+                fill
+                className="object-contain"
+                priority
+              />
             </div>
 
-            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl text-center sm:text-left leading-relaxed">
-              Revolutionizing Legal Services with AI-Powered Efficiency—
-              <span className="text-indigo-500 font-semibold">
-                Outperforming Traditional Firms
-              </span>{" "}
-              for Results You Deserve.
-            </p>
+            {/* Left side - Text content */}
+            <div className="relative z-10 flex flex-col gap-8 items-center sm:items-start md:max-w-[60%]">
+              <div className="font-extrabold text-5xl [text-wrap:balance]">
+                Your Trusted Legal Team for{" "}
+                <span className="text-indigo-500 inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] overflow-hidden">
+                  <ul className="block animate-text-slide-4 text-left leading-tight [&_li]:block">
+                    <li>Car Accidents</li>
+                    <li>DUI</li>
+                    <li>Traffic Tickets</li>
+                    <li>Lemon Law</li>
+                    <li aria-hidden="true">Car Accidents</li>
+                  </ul>
+                </span>
+              </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-              <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-indigo-500 text-white gap-2 hover:bg-indigo-600 text-base h-12 px-8 font-medium w-full sm:w-auto">
-                Get a Free Case Evaluation
-              </button>
-              <p className="text-sm text-center sm:text-left text-gray-600 dark:text-gray-400">
-                Available 24/7. Let&apos;s Win Together!
+              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl text-center sm:text-left leading-relaxed">
+                Revolutionizing Legal Services with AI-Powered Efficiency—
+                <span className="text-indigo-500 font-semibold">
+                  Outperforming Traditional Firms
+                </span>{" "}
+                for Results You Deserve.
               </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
+                <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-indigo-500 text-white gap-2 hover:bg-indigo-600 text-base h-12 px-8 font-medium w-full sm:w-auto">
+                  Get a Free Case Evaluation
+                </button>
+                <p className="text-sm text-center sm:text-left text-gray-600 dark:text-gray-400">
+                  Available 24/7. Let&apos;s Win Together!
+                </p>
+              </div>
             </div>
-            
-            {/* this is the gradient
-            <div className="absolute top-[60%] left-0 right-0 -translate-y-1/2 -z-10 overflow-hidden">
-              <svg
-                className="w-[200%] md:w-full h-96 translate-x-[-25%] md:translate-x-0"
-                viewBox="0 0 1440 250"
-                fill="none"
-                preserveAspectRatio="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M0,150 C240,70 480,70 720,150 C960,230 1200,230 1440,150 C1440,150 1440,0 1440,0 C960,50 480,50 0,0 Z"
-                  fill="url(#gradient)"
-                  className="opacity-10"
-                />
-                <defs>
-                  <linearGradient id="gradient" x1="0" y1="0" x2="1440" y2="0">
-                    <stop offset="0%" stopColor="#6366f1" />
-                    <stop offset="50%" stopColor="#818cf8" />
-                    <stop offset="100%" stopColor="#6366f1" />
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
-            {/* this is the gradient */}  
-            
           </div>
         </div>
 
