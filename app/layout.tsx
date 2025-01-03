@@ -32,11 +32,15 @@ export const metadata: Metadata = {
       follow: true,
     },
   },
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#6366f1",
   alternates: {
     canonical: "https://www.calicarlaw.com",
   },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#6366f1",
 };
 
 export default function RootLayout({
