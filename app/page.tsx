@@ -2,16 +2,18 @@ import WhyChooseUs from './components/WhyChooseUs';
 import OurServices from './components/OurServices';
 import Navbar from './components/Navbar';
 import Image from 'next/image';
+import {FolderSearch2, Scale} from 'lucide-react';
 
 export default function Home() {
   return (
     <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
       <Navbar />
       <main className="flex flex-col">
-        <div className="p-8 pb-20 sm:p-20">
-          <div className="relative max-w-7xl mx-auto">
+        <div className="p-8 sm:p-12 md:p-16 lg:p-20">
+          <div className="mt-0 sm:mt-16 relative flex flex-row items-center max-w-7xl mx-auto">
+
             {/* Right side - Lady of Justice Image */}
-            <div className="absolute right-0 w-full md:w-[60%] aspect-square max-w-[600px] opacity-20 md:opacity-100">
+            <div className="absolute right-0 w-full md:w-[60%] aspect-square max-w-[600px] opacity-20 lg:opacity-100">
               <Image
                 src="/images/hero/lady-of-justice2.png"
                 alt="Lady of Justice statue symbolizing law and justice"
@@ -36,7 +38,7 @@ export default function Home() {
                 </span>
               </div>
 
-              <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xl text-center sm:text-left leading-relaxed">
+              <p className="text-black font-bold sm:font-medium backdrop-blur-sm rounded-lg  lg:bg-transparent text-lg md:text-xl sm:text-gray-600 dark:text-gray-300 text-center sm:text-left leading-relaxed max-w-sm xl:max-w-xl">
                 Revolutionizing Legal Services with AI-Powered Efficiency—
                 <span className="text-[#50ade4] font-semibold">
                   Outperforming Traditional Firms
@@ -51,6 +53,57 @@ export default function Home() {
                 <p className="text-sm text-center sm:text-left text-gray-600 dark:text-gray-400">
                   Available 24/7. Let&apos;s Win Together!
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* California Courts Directory Section */}
+        <div className=" mt-4 sm:mt-6 lg:mt-8 xl:mt-24 max-w-7xl mx-auto p-4 sm:p-2">
+          <div className="relative overflow-hidden bg-gradient-to-br from-[#50ade4] to-[#2980b9] rounded-2xl p-8 md:p-12 shadow-xl">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <svg className="w-full h-full" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse">
+                  <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5"/>
+                </pattern>
+                <rect width="100" height="100" fill="url(#grid)" />
+              </svg>
+            </div>
+            
+            <div className="relative flex flex-col md:flex-row gap-8 items-center">
+              <div className="flex-1 space-y-6">
+                <h2 className="text-4xl md:text-5xl font-bold text-white flex items-center sm:gap-3">
+                  California Courts Directory <Scale className="w-24 h-24 md:w-12 md:h-12" />
+                </h2>
+                <p className="text-xl text-white/90">
+                  The California legal system can be tough to navigate, so we’ve simplified it for you. Our complete court directory has everything you need—from paying traffic fines to handling legal matters—quickly and easily.                </p>
+                <a 
+                  href="/find-your-california-court"
+                  className="inline-flex items-center gap-2 bg-white text-[#50ade4] hover:bg-gray-100 font-semibold rounded-full px-8 py-4 transition-all transform hover:scale-105 group"
+                >
+                  Find Your Local Court
+                  <svg 
+                    className="w-5 h-5 transform transition-transform group-hover:translate-x-1" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M9 5l7 7-7 7"
+                    />
+                  </svg>
+                </a>
+              </div>
+
+              {/* Decorative Icon */}
+              <div className="flex-shrink-0 w-48 h-48 relative">
+                <div className="absolute inset-0 bg-white/10 rounded-full flex items-center justify-center">
+                  <FolderSearch2 className="w-20 h-20 text-white" />
+                </div>
               </div>
             </div>
           </div>
