@@ -96,8 +96,8 @@ export default function FindYourCourt() {
     fetchAllCourts();
   }, []);
 
-  // JSON-LD structured data
-  const jsonLd = {
+  // Move JSON-LD into a function to make it dynamic
+  const getJsonLd = (allCourts: Courthouse[]) => ({
     "@context": "https://schema.org",
     "@type": "Dataset",
     "name": "California Courts Directory",
@@ -138,7 +138,7 @@ export default function FindYourCourt() {
       "publicAccess": true,
       "additionalType": "Courthouse"
     }))
-  };
+  });
 
   const searchCourts = async (term: string) => {
     if (!term) {
@@ -180,9 +180,11 @@ export default function FindYourCourt() {
 
   return (
     <>
-      <Script id="court-directory-jsonld" type="application/ld+json">
-        {JSON.stringify(jsonLd)}
-      </Script>
+      {allCourts.length > 0 && (
+        <Script id="court-directory-jsonld" type="application/ld+json">
+          {JSON.stringify(getJsonLd(allCourts))}
+        </Script>
+      )}
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto px-4 py-8 sm:py-16">
           <div className="max-w-4xl mx-auto">
