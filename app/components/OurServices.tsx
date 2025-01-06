@@ -25,7 +25,7 @@ const services = [
 
 export default function OurServices() {
   return (
-    <section className=" mt-4 sm:mt-6 lg:mt-8 xl:mt-12 max-w-7xl mx-auto p-4 sm:p-2">
+    <section className="mt-4 sm:mt-6 lg:mt-8 xl:mt-12 max-w-7xl mx-auto p-2 md:p-0 mb-12">
       <div className="container px-4 sm:px-4">
         <div className="mx-auto max-w-screen-xl">
           <div className="flex flex-col items-center justify-between gap-y-4 md:flex-row">
@@ -42,14 +42,14 @@ export default function OurServices() {
           <div className="mt-8 grid gap-6 md:mt-12 md:grid-cols-2 lg:grid-cols-4">
             {services.map((service, index) => (
               <div key={index} className="rounded-xl border bg-gray-50/50 p-6">
-                <div className="mb-6">
+                <div className="flex flex-row items-center gap-4 mb-6">
                   <div className="inline-flex h-16 w-16 items-center justify-center rounded-lg bg-[#50ade4]/10">
                     <service.icon className="h-8 w-8 text-[#50ade4]" />
                   </div>
+                  <h4 className="text-2xl font-semibold">
+                    {service.title}
+                  </h4>
                 </div>
-                <h4 className="mb-4 text-xl font-semibold md:text-2xl">
-                  {service.title}
-                </h4>
                 <p className="text-lg text-gray-600">
                   {service.description}
                 </p>

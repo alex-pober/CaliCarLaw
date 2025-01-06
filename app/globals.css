@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body {
+  scrollbar-gutter: stable both-edges;
+}
+
 /* General Styling */
 .markdown-body {
   font-family: "Inter", sans-serif;

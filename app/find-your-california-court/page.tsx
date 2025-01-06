@@ -7,6 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
+import { MarkdownRenderer } from "@/lib/md-rendered";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { getAllCourtsAction } from "./actions";
+import Script from 'next/script';
 import {
   MapPin,
   Phone,
@@ -20,10 +25,6 @@ import {
   CalendarDays,
   CreditCard,
 } from "lucide-react";
-import { MarkdownRenderer } from "@/lib/md-rendered";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { getAllCourtsAction } from "./actions";
 
 interface Courthouse {
   more_info: string;
@@ -80,6 +81,64 @@ export default function FindYourCourt() {
   const [searchTerm, setSearchTerm] = useState("");
   const [courts, setCourts] = useState<Courthouse[]>([]);
   const [loading, setLoading] = useState(false);
+  const [allCourts, setAllCourts] = useState<Courthouse[]>([]);
+
+  useEffect(() => {
+    const fetchAllCourts = async () => {
+      try {
+        const courts = await getAllCourtsAction();
+        setAllCourts(courts);
+      } catch (error) {
+        console.log("Error fetching all courts:", error);
+      }
+    };
+
+    fetchAllCourts();
+  }, []);
+
+  // JSON-LD structured data
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Dataset",
+    "name": "California Courts Directory",
+    "description": "Complete directory of California courthouses including superior courts and county courts",
+    "keywords": ["California courts", "courthouse directory", "superior courts", "county courts", "California judicial system", "pay ticket link"],
+    "url": "https://www.californiacarlaw.com/find-your-california-court",
+    "provider": {
+      "@type": "Organization",
+      "name": "CaliforniaCarLaw",
+      "url": "https://www.californiacarlaw.com/"
+    },
+    "spatialCoverage": {
+      "@type": "Place",
+      "name": "California",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      }
+    },
+    "distribution": {
+      "@type": "DataDownload",
+      "encodingFormat": "JSON",
+      "contentUrl": "https://www.californiacarlaw.com/find-your-california-court"
+    },
+    "hasPart": allCourts.map(court => ({
+      "@type": "GovernmentBuilding",
+      "name": court.courthouse_name,
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": court.address,
+        "addressRegion": "CA",
+        "addressCountry": "US"
+      },
+      "telephone": court.phone_number,
+      "areaServed": court.county,
+      "openingHours": court.hours_building || "Please contact court for hours",
+      "publicAccess": true,
+      "additionalType": "Courthouse"
+    }))
+  };
 
   const searchCourts = async (term: string) => {
     if (!term) {
@@ -91,9 +150,8 @@ export default function FindYourCourt() {
     console.log("Searching for term:", term);
 
     try {
-      // Get all courts from server cache
-      const allCourts = await getAllCourtsAction();
-      console.log("Got all courts, filtering for:", term);
+      // Use the already fetched courts from state
+      console.log("Filtering cached courts for:", term);
 
       // Client-side filtering
       const searchTerm = term.toLowerCase();
@@ -121,48 +179,52 @@ export default function FindYourCourt() {
   }, [searchTerm]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4 py-8 sm:py-16">
-        <div className="max-w-4xl mx-auto">
-          {/* Hero Section */}
-          <div className="mb-12 relative overflow-hidden bg-gradient-to-br from-[#50ade4] to-[#2980b9] rounded-2xl p-8 md:p-12 shadow-xl">
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-10">
-              <svg
-                className="w-full h-full"
-                preserveAspectRatio="none"
-                viewBox="0 0 100% 100%"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <pattern
-                  id="grid"
-                  width="40"
-                  height="40"
-                  patternUnits="userSpaceOnUse"
+    <>
+      <Script id="court-directory-jsonld" type="application/ld+json">
+        {JSON.stringify(jsonLd)}
+      </Script>
+      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        <div className="container mx-auto px-4 py-8 sm:py-16">
+          <div className="max-w-4xl mx-auto">
+            {/* Hero Section */}
+            <div className="mb-12 relative overflow-hidden bg-gradient-to-br from-[#50ade4] to-[#2980b9] rounded-2xl p-8 md:p-12 shadow-xl">
+              {/* Background Pattern */}
+              <div className="absolute inset-0 opacity-10">
+                <svg
+                  className="w-full h-full"
+                  preserveAspectRatio="none"
+                  viewBox="0 0 100% 100%"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <path
-                    d="M 40 0 L 0 0 0 40"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="1"
-                  />
-                </pattern>
-                <rect width="100%" height="100%" fill="url(#grid)" />
-              </svg>
-            </div>
+                  <pattern
+                    id="grid"
+                    width="40"
+                    height="40"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    <path
+                      d="M 40 0 L 0 0 0 40"
+                      fill="none"
+                      stroke="white"
+                      strokeWidth="1"
+                    />
+                  </pattern>
+                  <rect width="100%" height="100%" fill="url(#grid)" />
+                </svg>
+              </div>
 
-            <div className="relative">
-              <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
-                Find Your California Court
-              </h1>
-              <p className="text-lg text-white/90 max-w-2xl">
-                Easily locate your California courthouse and access online
-                services for traffic tickets, citations, and case information.
-                Skip the line - handle your court matters online!
-              </p>
-            </div>
+              <div className="relative">
+                <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
+                  Find Your California Court
+                </h1>
+                <p className="text-lg text-white/90 max-w-2xl">
+                  Easily locate your California courthouse and access online
+                  services for traffic tickets, citations, and case information.
+                  Skip the line - handle your court matters online!
+                </p>
+              </div>
 
-            {/* Search Section */}
+              {/* Search Section */}
               <div className="mt-2 flex gap-4">
                 <div className="flex-1 relative">
                   <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
@@ -203,252 +265,253 @@ export default function FindYourCourt() {
                   )}
                 </div>
               )}
-          </div>
-
-          {loading ? (
-            <div className="space-y-4">
-              {[...Array(3)].map((_, i) => (
-                <Card key={i}>
-                  <CardContent className="p-4">
-                    <Skeleton className="h-4 w-3/4 mb-2" />
-                    <Skeleton className="h-4 w-1/2" />
-                  </CardContent>
-                </Card>
-              ))}
             </div>
-          ) : courts.length > 0 ? (
-            <div className="space-y-6">
-              {courts.map((court) => (
-                <Card
-                  key={court.id}
-                  className="border-l-4 border-l-[#50ade4] hover:shadow-lg transition-shadow"
-                >
-                  <CardHeader className="pb-2">
-                    <h2 className="text-2xl font-bold text-[#50ade4] md:text-3xl">
-                      {court.courthouse_name}
-                    </h2>
-                  </CardHeader>
-                  <CardContent className="text-black">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {/* Basic Information Section */}
-                      <div className="space-y-3">
-                        <div className="flex flex-col space-y-2">
-                          <p className="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                              <MapPin className="h-4 w-4 text-[#50ade4]" />
-                              Address:
-                            </span>
-                            <span>{court.address}</span>
-                          </p>
-                          <p className="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                              <Phone className="h-4 w-4 text-[#50ade4]" />
-                              Phone:
-                            </span>
-                            <span>{court.phone_number}</span>
-                          </p>
-                          <p className="flex flex-col sm:flex-row sm:items-center gap-2">
-                            <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                              <Building2 className="h-4 w-4 text-[#50ade4]" />
-                              County:
-                            </span>
-                            <span>{court.county}</span>
-                          </p>
-                          {court.matters_served && (
+
+            {loading ? (
+              <div className="space-y-4">
+                {[...Array(3)].map((_, i) => (
+                  <Card key={i}>
+                    <CardContent className="p-4">
+                      <Skeleton className="h-4 w-3/4 mb-2" />
+                      <Skeleton className="h-4 w-1/2" />
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            ) : courts.length > 0 ? (
+              <div className="space-y-6">
+                {courts.map((court) => (
+                  <Card
+                    key={court.id}
+                    className="border-l-4 border-l-[#50ade4] hover:shadow-lg transition-shadow"
+                  >
+                    <CardHeader className="pb-2">
+                      <h2 className="text-2xl font-bold text-[#50ade4] md:text-3xl">
+                        {court.courthouse_name}
+                      </h2>
+                    </CardHeader>
+                    <CardContent className="text-black">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {/* Basic Information Section */}
+                        <div className="space-y-3">
+                          <div className="flex flex-col space-y-2">
                             <p className="flex flex-col sm:flex-row sm:items-center gap-2">
                               <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                                <FileText className="h-4 w-4 text-[#50ade4]" />
-                                Matters:
+                                <MapPin className="h-4 w-4 text-[#50ade4]" />
+                                Address:
                               </span>
-                              <span>{court.matters_served}</span>
+                              <span>{court.address}</span>
                             </p>
-                          )}
-                        </div>
-
-                        {/* Transportation Section */}
-                        {((court.parking && court.parking !== "N/A") ||
-                          (court.transportation &&
-                            court.transportation !== "N/A")) && (
-                          <div className="space-y-2 pt-4 border-t">
-                            {court.parking && court.parking !== "N/A" && (
-                              <p className="flex flex-col sm:flex-row sm:items-start gap-2">
+                            <p className="flex flex-col sm:flex-row sm:items-center gap-2">
+                              <span className="font-semibold min-w-[100px] flex items-center gap-2">
+                                <Phone className="h-4 w-4 text-[#50ade4]" />
+                                Phone:
+                              </span>
+                              <span>{court.phone_number}</span>
+                            </p>
+                            <p className="flex flex-col sm:flex-row sm:items-center gap-2">
+                              <span className="font-semibold min-w-[100px] flex items-center gap-2">
+                                <Building2 className="h-4 w-4 text-[#50ade4]" />
+                                County:
+                              </span>
+                              <span>{court.county}</span>
+                            </p>
+                            {court.matters_served && (
+                              <p className="flex flex-col sm:flex-row sm:items-center gap-2">
                                 <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                                  <Car className="h-4 w-4 text-[#50ade4]" />
-                                  Parking:
+                                  <FileText className="h-4 w-4 text-[#50ade4]" />
+                                  Matters:
                                 </span>
-                                <span>{court.parking}</span>
+                                <span>{court.matters_served}</span>
                               </p>
                             )}
-                            {court.transportation &&
-                              court.transportation !== "N/A" && (
-                                <p className="flex flex-col sm:flex-row sm:items-start gap-2">
-                                  <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                                    <Bus className="h-4 w-4 text-[#50ade4]" />
-                                    Transit:
-                                  </span>
-                                  <span>{court.transportation}</span>
-                                </p>
-                              )}
                           </div>
-                        )}
+
+                          {/* Transportation Section */}
+                          {((court.parking && court.parking !== "N/A") ||
+                            (court.transportation &&
+                              court.transportation !== "N/A")) && (
+                              <div className="space-y-2 pt-4 border-t">
+                                {court.parking && court.parking !== "N/A" && (
+                                  <p className="flex flex-col sm:flex-row sm:items-start gap-2">
+                                    <span className="font-semibold min-w-[100px] flex items-center gap-2">
+                                      <Car className="h-4 w-4 text-[#50ade4]" />
+                                      Parking:
+                                    </span>
+                                    <span>{court.parking}</span>
+                                  </p>
+                                )}
+                                {court.transportation &&
+                                  court.transportation !== "N/A" && (
+                                    <p className="flex flex-col sm:flex-row sm:items-start gap-2">
+                                      <span className="font-semibold min-w-[100px] flex items-center gap-2">
+                                        <Bus className="h-4 w-4 text-[#50ade4]" />
+                                        Transit:
+                                      </span>
+                                      <span>{court.transportation}</span>
+                                    </p>
+                                  )}
+                              </div>
+                            )}
+                        </div>
+
+                        {/* Hours Section */}
+                        <div className="space-y-4 ">
+                          {(court.hours_building ||
+                            court.hours_clerk ||
+                            court.hours_self_help) && (
+                              <div className="bg-gray-50 p-4 rounded-md">
+                                {court.hours_building && (
+                                  <div className="mb-4">
+                                    <h3 className="font-semibold text-[#50ade4] mb-2 flex items-center gap-2">
+                                      <Clock className="h-4 w-4" />
+                                      Building Hours
+                                    </h3>
+                                    <pre className="whitespace-pre-line text-sm">
+                                      {formatHours(court.hours_building)}
+                                    </pre>
+                                  </div>
+                                )}
+                                {court.hours_clerk && (
+                                  <div className="mb-4">
+                                    <h3 className="font-semibold text-[#50ade4] mb-2 flex items-center gap-2">
+                                      <Clock className="h-4 w-4" />
+                                      Clerk Hours
+                                    </h3>
+                                    <pre className="whitespace-pre-line text-sm">
+                                      {formatHours(court.hours_clerk)}
+                                    </pre>
+                                  </div>
+                                )}
+                                {court.hours_self_help && (
+                                  <div>
+                                    <h3 className="font-semibold text-[#50ade4] mb-2 flex items-center gap-2">
+                                      <Clock className="h-4 w-4" />
+                                      Self-Help Hours
+                                    </h3>
+                                    <pre className="whitespace-pre-line text-sm">
+                                      {formatHours(court.hours_self_help)}
+                                    </pre>
+                                  </div>
+                                )}
+                              </div>
+                            )}
+                        </div>
                       </div>
 
-                      {/* Hours Section */}
-                      <div className="space-y-4 ">
-                        {(court.hours_building ||
-                          court.hours_clerk ||
-                          court.hours_self_help) && (
-                          <div className="bg-gray-50 p-4 rounded-md">
-                            {court.hours_building && (
-                              <div className="mb-4">
-                                <h3 className="font-semibold text-[#50ade4] mb-2 flex items-center gap-2">
-                                  <Clock className="h-4 w-4" />
-                                  Building Hours
-                                </h3>
-                                <pre className="whitespace-pre-line text-sm">
-                                  {formatHours(court.hours_building)}
-                                </pre>
-                              </div>
-                            )}
-                            {court.hours_clerk && (
-                              <div className="mb-4">
-                                <h3 className="font-semibold text-[#50ade4] mb-2 flex items-center gap-2">
-                                  <Clock className="h-4 w-4" />
-                                  Clerk Hours
-                                </h3>
-                                <pre className="whitespace-pre-line text-sm">
-                                  {formatHours(court.hours_clerk)}
-                                </pre>
-                              </div>
-                            )}
-                            {court.hours_self_help && (
-                              <div>
-                                <h3 className="font-semibold text-[#50ade4] mb-2 flex items-center gap-2">
-                                  <Clock className="h-4 w-4" />
-                                  Self-Help Hours
-                                </h3>
-                                <pre className="whitespace-pre-line text-sm">
-                                  {formatHours(court.hours_self_help)}
-                                </pre>
-                              </div>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Additional Information Section */}
-                    <div className="mt-6 gap-4 pt-4 border-t flex flex-row">
-                      {court.courthouse_page_url && (
-                        <Button
-                          asChild
-                          className="inline-flex items-center gap-2 bg-[#3d8ab8] text-white px-6 py-2 rounded-md hover:bg-[#2d6a8f] transition-colors"
-                        >
-                          <Link
-                            href={getMainDomain(court.courthouse_page_url)}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                      {/* Additional Information Section */}
+                      <div className="mt-6 gap-4 pt-4 border-t flex flex-row">
+                        {court.courthouse_page_url && (
+                          <Button
+                            asChild
+                            className="inline-flex items-center gap-2 bg-[#3d8ab8] text-white px-6 py-2 rounded-md hover:bg-[#2d6a8f] transition-colors"
                           >
-                            {" "}
-                            Visit Court Website{" "}
-                            <ExternalLink className="h-4 w-4" />
-                          </Link>
-                        </Button>
-                      )}
-
-                      {/* Custom Buttons */}
-                      {court.custom_button &&
-                        court.custom_button.length > 0 && (
-                          <div className="flex flex-wrap gap-2">
-                            {court.custom_button.map((button, index) => (
-                              <Button
-                                asChild
-                                key={index}
-                                className="inline-flex items-center gap-2 bg-[#3d8ab8] text-white px-6 py-2 rounded-md hover:bg-[#2d6a8f] transition-colors"
-                              >
-                                <Link
-                                  href={button.url}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                >
-                                  {button.label}
-                                </Link>
-                              </Button>
-                            ))}
-                          </div>
+                            <Link
+                              href={getMainDomain(court.courthouse_page_url)}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {" "}
+                              Visit Court Website{" "}
+                              <ExternalLink className="h-4 w-4" />
+                            </Link>
+                          </Button>
                         )}
-                    </div>
-                    {court.more_info && (
-                      <div className="prose prose-sm max-w-none">
-                        <MarkdownRenderer content={court.more_info} />
+
+                        {/* Custom Buttons */}
+                        {court.custom_button &&
+                          court.custom_button.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                              {court.custom_button.map((button, index) => (
+                                <Button
+                                  asChild
+                                  key={index}
+                                  className="inline-flex items-center gap-2 bg-[#3d8ab8] text-white px-6 py-2 rounded-md hover:bg-[#2d6a8f] transition-colors"
+                                >
+                                  <Link
+                                    href={button.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    {button.label}
+                                  </Link>
+                                </Button>
+                              ))}
+                            </div>
+                          )}
                       </div>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          ) : searchTerm ? (
-            <p className="text-center text-muted-foreground">
-              No courts found matching your search.
-            </p>
-          ) : (
-            <div>
-              <p className="mb-8 text-center text-muted-foreground">
-                Start typing above to find your courthouse
-              </p>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-                <Card className="border-t-4 border-t-[#50ade4]">
-                  <CardHeader>
-                    <div className="flex items-center space-x-2">
-                      <CreditCard className="h-5 w-5 text-[#50ade4]" />
-                      <h3 className="font-semibold">Traffic Fine Payments</h3>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      Most California courts offer online payment systems for
-                      traffic tickets. Search for your court above to find their
-                      payment portal.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-t-4 border-t-[#50ade4]">
-                  <CardHeader>
-                    <div className="flex items-center space-x-2">
-                      <CalendarDays className="h-5 w-5 text-[#50ade4]" />
-                      <h3 className="font-semibold">Arraignment Scheduling</h3>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      Need to schedule a court date? Find your courthouse above
-                      to access their online scheduling system.
-                    </p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-t-4 border-t-[#50ade4]">
-                  <CardHeader>
-                    <div className="flex items-center space-x-2">
-                      <FileText className="h-5 w-5 text-[#50ade4]" />
-                      <h3 className="font-semibold">Case Information</h3>
-                    </div>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">
-                      Look up your traffic ticket or case status through your
-                      local court&apos;s portal. Search above to find your
-                      court.
-                    </p>
-                  </CardContent>
-                </Card>
+                      {court.more_info && (
+                        <div className="prose prose-sm max-w-none">
+                          <MarkdownRenderer content={court.more_info} />
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                ))}
               </div>
-            </div>
-          )}
+            ) : searchTerm ? (
+              <div className="text-center text-muted-foreground">
+                No courts found matching your search.
+              </div>
+            ) : (
+              <div>
+                <div className="mb-8 text-center text-muted-foreground">
+                  Start typing above to find your courthouse
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
+                  <Card className="border-t-4 border-t-[#50ade4]">
+                    <CardHeader>
+                      <div className="flex items-center space-x-2">
+                        <CreditCard className="h-5 w-5 text-[#50ade4]" />
+                        <h3 className="font-semibold">Traffic Fine Payments</h3>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground">
+                        Most California courts offer online payment systems for
+                        traffic tickets. Search for your court above to find their
+                        payment portal.
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-t-4 border-t-[#50ade4]">
+                    <CardHeader>
+                      <div className="flex items-center space-x-2">
+                        <CalendarDays className="h-5 w-5 text-[#50ade4]" />
+                        <h3 className="font-semibold">Arraignment Scheduling</h3>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground">
+                        Need to schedule a court date? Find your courthouse above
+                        to access their online scheduling system.
+                      </p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-t-4 border-t-[#50ade4]">
+                    <CardHeader>
+                      <div className="flex items-center space-x-2">
+                        <FileText className="h-5 w-5 text-[#50ade4]" />
+                        <h3 className="font-semibold">Case Information</h3>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm text-muted-foreground">
+                        Look up your traffic ticket or case status through your
+                        local court&apos;s portal. Search above to find your
+                        court.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
