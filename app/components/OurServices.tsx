@@ -25,7 +25,7 @@ const services = [
 
 export default function OurServices() {
   return (
-    <section className="py-16">
+    <section className=" mt-4 sm:mt-6 lg:mt-8 xl:mt-12 max-w-7xl mx-auto p-4 sm:p-2">
       <div className="container px-4 sm:px-4">
         <div className="mx-auto max-w-screen-xl">
           <div className="flex flex-col items-center justify-between gap-y-4 md:flex-row">

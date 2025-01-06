@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
+'use client';
 
 import { useState, useEffect } from "react";
-import { createClient } from "@/utils/supabase/client";
 import debounce from "lodash/debounce";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
@@ -24,6 +23,7 @@ import {
 import { MarkdownRenderer } from "@/lib/md-rendered";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { getAllCourtsAction } from "./actions";
 
 interface Courthouse {
   more_info: string;
@@ -77,13 +77,9 @@ const getMainDomain = (url: string) => {
 };
 
 export default function FindYourCourt() {
-  const supabase = createClient();
   const [searchTerm, setSearchTerm] = useState("");
   const [courts, setCourts] = useState<Courthouse[]>([]);
   const [loading, setLoading] = useState(false);
-  const [searchCache, setSearchCache] = useState<Record<string, Courthouse[]>>(
-    {}
-  );
 
   const searchCourts = async (term: string) => {
     if (!term) {
@@ -91,39 +87,23 @@ export default function FindYourCourt() {
       return;
     }
 
-    // Check cache first
-    if (searchCache[term.toLowerCase()]) {
-      console.log("Using cached results for:", term);
-      setCourts(searchCache[term.toLowerCase()]);
-      return;
-    }
-
     setLoading(true);
-    console.log("Searching for:", term);
+    console.log("Searching for term:", term);
 
     try {
-      const { data, error } = await supabase
-        .from("courthouses")
-        .select("*")
-        .or(
-          `courthouse_name.ilike.%${term}%,address.ilike.%${term}%,county.ilike.%${term}%`
-        )
-        .limit(10);
+      // Get all courts from server cache
+      const allCourts = await getAllCourtsAction();
+      console.log("Got all courts, filtering for:", term);
 
-      if (error) {
-        console.log("Error searching courts:", error);
-        return;
-      }
+      // Client-side filtering
+      const searchTerm = term.toLowerCase();
+      const results = allCourts.filter(court => 
+        court.courthouse_name.toLowerCase().includes(searchTerm) ||
+        court.address.toLowerCase().includes(searchTerm) ||
+        court.county.toLowerCase().includes(searchTerm)
+      ).slice(0, 10); // Keep the 10 limit for UI purposes
 
-      const results = data || [];
-      console.log("Search results:", results);
-
-      // Update cache
-      setSearchCache((prev) => ({
-        ...prev,
-        [term.toLowerCase()]: results,
-      }));
-
+      console.log(`Found ${results.length} matches for: ${term}`);
       setCourts(results);
     } catch (error) {
       console.log("Error in search:", error);
@@ -132,7 +112,7 @@ export default function FindYourCourt() {
     }
   };
 
-  const debouncedSearch = debounce(searchCourts, 300);
+  const debouncedSearch = debounce(searchCourts, 500);
 
   useEffect(() => {
     debouncedSearch(searchTerm);
@@ -142,62 +122,87 @@ export default function FindYourCourt() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4 py-16">
+      <div className="container mx-auto px-4 py-8 sm:py-16">
         <div className="max-w-4xl mx-auto">
           {/* Hero Section */}
-          <div className="mb-12 bg-white rounded-xl p-8 shadow-sm">
-            <h1 className="text-5xl font-bold mb-4 text-gray-900">
-              Find Your California Court
-            </h1>
-            <p className="text-lg text-gray-600 max-w-2xl">
-              Easily locate your California courthouse and access online
-              services for traffic tickets, citations, and case information.
-              Skip the line - handle your court matters online!
-            </p>
-          </div>
-
-          {/* Search Section */}
-          <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
-            <div className="flex gap-4">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
-                <Input
-                  type="text"
-                  placeholder="Search by city, county, or courthouse name..."
-                  value={searchTerm}
-                  onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                    debouncedSearch(e.target.value);
-                  }}
-                  className="pl-10 h-12 text-lg w-full border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-lg"
-                />
-              </div>
-            </div>
-            {searchTerm && (
-              <div className="mt-3 flex items-center gap-2">
-                <Badge
-                  variant={
-                    courts.length === 0 && !loading
-                      ? "destructive"
-                      : "secondary"
-                  }
-                  className="text-xs font-normal"
+          <div className="mb-12 relative overflow-hidden bg-gradient-to-br from-[#50ade4] to-[#2980b9] rounded-2xl p-8 md:p-12 shadow-xl">
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-10">
+              <svg
+                className="w-full h-full"
+                preserveAspectRatio="none"
+                viewBox="0 0 100% 100%"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <pattern
+                  id="grid"
+                  width="40"
+                  height="40"
+                  patternUnits="userSpaceOnUse"
                 >
-                  {loading
-                    ? "Searching..."
-                    : courts.length === 0
-                    ? "No courts found"
-                    : `${courts.length} court${
-                        courts.length === 1 ? "" : "s"
-                      } found`}
-                </Badge>
-                {searchTerm.length >= 2 && (
-                  <span className="text-xs text-gray-500">
-                    searching in name, address, and county
-                  </span>
-                )}
+                  <path
+                    d="M 40 0 L 0 0 0 40"
+                    fill="none"
+                    stroke="white"
+                    strokeWidth="1"
+                  />
+                </pattern>
+                <rect width="100%" height="100%" fill="url(#grid)" />
+              </svg>
+            </div>
+
+            <div className="relative">
+              <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-white">
+                Find Your California Court
+              </h1>
+              <p className="text-lg text-white/90 max-w-2xl">
+                Easily locate your California courthouse and access online
+                services for traffic tickets, citations, and case information.
+                Skip the line - handle your court matters online!
+              </p>
+            </div>
+
+            {/* Search Section */}
+              <div className="mt-2 flex gap-4">
+                <div className="flex-1 relative">
+                  <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+                  <Input
+                    type="text"
+                    placeholder="Search by city, county, or courthouse name..."
+                    value={searchTerm}
+                    onChange={(e) => {
+                      setSearchTerm(e.target.value);
+                      debouncedSearch(e.target.value);
+                    }}
+                    className="pl-10 h-12 text-lg w-full border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-lg"
+                  />
+                </div>
               </div>
-            )}
+              {searchTerm && (
+                <div className="mt-3 flex items-center gap-2">
+                  <Badge
+                    variant={
+                      courts.length === 0 && !loading
+                        ? "destructive"
+                        : "secondary"
+                    }
+                    className="text-xs font-normal"
+                  >
+                    {loading
+                      ? "Searching..."
+                      : courts.length === 0
+                      ? "No courts found"
+                      : `${courts.length} court${
+                          courts.length === 1 ? "" : "s"
+                        } found`}
+                  </Badge>
+                  {searchTerm.length >= 2 && (
+                    <span className="text-xs text-white font-bold">
+                      searched in court names, address, and county.
+                    </span>
+                  )}
+                </div>
+              )}
           </div>
 
           {loading ? (
@@ -362,9 +367,9 @@ export default function FindYourCourt() {
                                 className="inline-flex items-center gap-2 bg-[#3d8ab8] text-white px-6 py-2 rounded-md hover:bg-[#2d6a8f] transition-colors"
                               >
                                 <Link
-                                   href={button.url}
-                                   target="_blank"
-                                   rel="noopener noreferrer"
+                                  href={button.url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
                                 >
                                   {button.label}
                                 </Link>
