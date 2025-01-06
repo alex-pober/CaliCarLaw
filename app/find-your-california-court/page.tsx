@@ -132,6 +132,7 @@ export default function FindYourCourt() {
         "addressRegion": "CA",
         "addressCountry": "US"
       },
+      "url": getMainDomain(court.courthouse_page_url),
       "telephone": court.phone_number,
       "areaServed": court.county,
       "openingHours": court.hours_building || "Please contact court for hours",
