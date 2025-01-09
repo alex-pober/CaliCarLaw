@@ -1,4 +1,5 @@
 import { Phone } from 'lucide-react';
+import Image from 'next/image';
 
 export default function Navbar() {
   return (
@@ -7,8 +8,15 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="/" className="text-3xl font-extrabold text-[#50ade4]">
-              CaliCarLaw
+            <a href="/" className="flex items-center">
+              <Image
+                src="/images/logos/CaliforniaCarLaw-Logo.svg"
+                alt="California Car Law"
+                width={120}
+                height={32}
+                className="h-16 w-auto p-1"
+                priority
+              />
             </a>
           </div>
 

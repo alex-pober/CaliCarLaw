@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { MarkdownRenderer } from "@/lib/md-rendered";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Image from "next/image";
 import { getAllCourtsAction } from "./actions";
 import {
   Search,
@@ -281,9 +282,14 @@ export default function FindYourCourt() {
               href="https://californiacarlaw.com"
               className="flex items-center space-x-2"
             >
-              <span className="text-xl font-semibold text-blue-600">
-                CaliforniaCarLaw
-              </span>
+              <Image
+                src="/images/logos/CaliforniaCarLaw-Logo.svg"
+                alt="California Car Law"
+                width={120}
+                height={32}
+                className="h-16 w-auto p-1"
+                priority
+              />
               <span className="text-sm text-gray-500">Court Directory</span>
             </Link>
             <div className="flex items-center space-x-4">
