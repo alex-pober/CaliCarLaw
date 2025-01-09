@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
@@ -12,20 +13,19 @@ import { MarkdownRenderer } from "@/lib/md-rendered";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getAllCourtsAction } from "./actions";
-import Script from "next/script";
 import {
+  Search,
   MapPin,
-  Phone,
   Building2,
+  CalendarDays,
+  CreditCard,
+  Globe,
+  Phone,
   FileText,
   Car,
   Bus,
   Clock,
   ExternalLink,
-  Search,
-  CalendarDays,
-  CreditCard,
-  ArrowRight,
 } from "lucide-react";
 
 interface Courthouse {
@@ -57,18 +57,18 @@ const dayMappings = {
   Thursday: "Thursday",
   Friday: "Friday",
   Saturday: "Saturday",
-  Sunday: "Sunday"
+  Sunday: "Sunday",
 };
 
 // Convert "8:00AM" or "12:30PM" to "08:00" or "12:30" in 24-hour format
 function convertTime12to24(timeStr: string) {
-  if (!timeStr || typeof timeStr !== 'string') {
-    return '';
+  if (!timeStr || typeof timeStr !== "string") {
+    return "";
   }
 
   const match = timeStr.match(/(\d{1,2}:\d{2})\s*(AM|PM)/i);
   if (!match) {
-    return '';
+    return "";
   }
 
   const [time, meridiem] = match.slice(1, 3);
@@ -95,18 +95,20 @@ function convertTime12to24(timeStr: string) {
 //   "Monday": "8:00AM - 4:30PM",
 //   ...
 // }
-//@ts-ignore
-function parseHoursToOpeningHoursSpecification(hoursObj) {
+
+function parseHoursToOpeningHoursSpecification(
+  hoursObj: JSON | { [s: string]: unknown } | ArrayLike<unknown>
+) {
   return Object.entries(hoursObj).map(([day, timeRange]) => {
     // timeRange: "8:00AM - 4:30PM"
-    //@ts-ignore
-    const [openRaw, closeRaw] = timeRange.split(" - "); 
+
+    const [openRaw, closeRaw] = timeRange.split(" - ");
     return {
       "@type": "OpeningHoursSpecification",
-      //@ts-ignore
-      "dayOfWeek": dayMappings[day],           // e.g. "https://schema.org/Monday"
-      "opens": convertTime12to24(openRaw),     // e.g. "08:00"
-      "closes": convertTime12to24(closeRaw),    // e.g. "16:30"
+      // @ts-ignore
+      dayOfWeek: dayMappings[day], // e.g. "https://schema.org/Monday"
+      opens: convertTime12to24(openRaw), // e.g. "08:00"
+      closes: convertTime12to24(closeRaw), // e.g. "16:30"
     };
   });
 }
@@ -160,56 +162,55 @@ export default function FindYourCourt() {
     fetchAllCourts();
   }, []);
 
-
-    // Convert each courthouse to a JSON-LD object
-    const courtsData = allCourts.map((court) => {
-      return {
-        "@context": "https://schema.org",
-        "@type": "GovernmentOffice", 
-        "name": court.courthouse_name,
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": court.address, 
-          "addressRegion": "CA",        
-          "addressCountry": "US",                
-          "addressState": "CA"
+  // Convert each courthouse to a JSON-LD object
+  const courtsData = allCourts.map((court) => {
+    return {
+      "@context": "https://schema.org",
+      "@type": "GovernmentOffice",
+      name: court.courthouse_name,
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: court.address,
+        addressRegion: "CA",
+        addressCountry: "US",
+        addressState: "CA",
+      },
+      telephone: court.phone_number,
+      url: getMainDomain(court.courthouse_page_url),
+      openingHoursSpecification: parseHoursToOpeningHoursSpecification(
+        court.hours_building
+      ),
+      image: court.photo,
+      amenityFeature: [
+        {
+          "@type": "LocationFeatureSpecification",
+          name: "Parking",
+          value: court.parking,
         },
-        "telephone": court.phone_number,
-        "url": getMainDomain(court.courthouse_page_url),
-        "openingHoursSpecification": parseHoursToOpeningHoursSpecification(
-          court.hours_building
-        ),
-        "image": court.photo,
-        "amenityFeature": [
-          {
-            "@type": "LocationFeatureSpecification",
-            "name": "Parking",
-            "value": court.parking
-          },
-          {
-            "@type": "LocationFeatureSpecification",
-            "name": "Public Transportation",
-            "value": court.transportation
-          }
-        ],
-        // Additional data
-        "additionalProperty": [
-          {
-            "@type": "PropertyValue",
-            "name": "Matters Served",
-            "value": court.matters_served
-          },
-          {
-            "@type": "PropertyValue",
-            "name": "More Info",
-            "value": court.more_info
-          }
-          // etc.
-        ]
-      };
-    });
-    // Convert the array of objects to a JSON string
-  
+        {
+          "@type": "LocationFeatureSpecification",
+          name: "Public Transportation",
+          value: court.transportation,
+        },
+      ],
+      // Additional data
+      additionalProperty: [
+        {
+          "@type": "PropertyValue",
+          name: "Matters Served",
+          value: court.matters_served,
+        },
+        {
+          "@type": "PropertyValue",
+          name: "More Info",
+          value: court.more_info,
+        },
+        // etc.
+      ],
+    };
+  });
+  // Convert the array of objects to a JSON string
+
   const jsonString = JSON.stringify(courtsData, null, 2);
 
   const searchCourts = async (term: string) => {
@@ -294,7 +295,8 @@ export default function FindYourCourt() {
                 California Court Directory
               </h2>
               <p className="mt-2 text-grey">
-                Find your court, links to pay your traffic tickets, and everything else courts make difficult to find.
+                Find your court, links to pay your traffic tickets, and
+                everything else courts make difficult to find.
               </p>
             </div>
 
@@ -528,53 +530,121 @@ export default function FindYourCourt() {
           </div>
         </div>
 
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-          <div className="group relative p-6 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 hover:shadow-md transition-all duration-300">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-xl transform group-hover:scale-[0.98] transition-transform duration-300"></div>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+          {/* Court Website Card */}
+          <div className="group relative p-6 rounded-2xl bg-gradient-to-br from-blue-50 to-indigo-50 hover:shadow-lg transition-all duration-300 border border-blue-100/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-indigo-500/5 rounded-2xl transform group-hover:scale-[0.98] transition-transform duration-300"></div>
             <div className="relative">
               <div className="flex items-center mb-4">
-                <div className="p-2 bg-blue-500 rounded-lg">
-                  <CreditCard className="h-6 w-6 text-white" />
+                <div className="p-2.5 bg-blue-600 rounded-xl">
+                  <Globe className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="ml-3 text-xl font-semibold text-gray-800">
-                  Pay Your Traffic Ticket Online
+                <h3 className="ml-3 text-xl font-semibold text-gray-900">
+                  Court Websites Made Easy
                 </h3>
               </div>
-              <p className="text-gray-600 leading-relaxed">
-                Most California courts offer convenient online payment portals.
-                Locate your court below to quickly and securely pay your traffic
-                ticket from anywhere.
+              <p className="text-gray-700 leading-relaxed">
+                Find your local court&apos;s official website instantly. Our
+                directory helps you navigate directly to your court&apos;s online
+                services, avoiding confusing government portals and outdated
+                links.
               </p>
-              <div className="mt-4 flex items-center text-blue-600 font-medium">
-                <span>Find payment portal</span>
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </div>
             </div>
           </div>
 
-          <div className="group relative p-6 rounded-xl bg-gradient-to-br from-blue-50 to-cyan-50 hover:shadow-md transition-all duration-300">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-cyan-500/5 rounded-xl transform group-hover:scale-[0.98] transition-transform duration-300"></div>
+          {/* Look Up Ticket Card */}
+          <div className="group relative p-6 rounded-2xl bg-gradient-to-br from-emerald-50 to-teal-50 hover:shadow-lg transition-all duration-300 border border-emerald-100/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/5 to-teal-500/5 rounded-2xl transform group-hover:scale-[0.98] transition-transform duration-300"></div>
             <div className="relative">
               <div className="flex items-center mb-4">
-                <div className="p-2 bg-blue-500 rounded-lg">
-                  <CalendarDays className="h-6 w-6 text-white" />
+                <div className="p-2.5 bg-emerald-600 rounded-xl">
+                  <Search className="h-6 w-6 text-white" />
                 </div>
-                <h3 className="ml-3 text-xl font-semibold text-gray-800">
-                  Fight Your Traffic Ticket
+                <h3 className="ml-3 text-xl font-semibold text-gray-900">
+                  Quick Ticket Lookup
                 </h3>
               </div>
-              <p className="text-gray-600 leading-relaxed">
-                Exercise your right to contest your traffic ticket in court. Get
-                essential information about court appearances and traffic
-                divisions below.
+              <p className="text-gray-700 leading-relaxed">
+                Search your court above to access their ticket lookup system.
+                Get instant access to your citation details, fine amounts, and
+                case information through your court's official portal.
               </p>
-              <div className="mt-4 flex items-center text-blue-600 font-medium">
-                <span>Court appearance info</span>
-                <ArrowRight className="ml-2 h-4 w-4" />
+            </div>
+          </div>
+
+          {/* Pay Ticket Card */}
+          <div className="group relative p-6 rounded-2xl bg-gradient-to-br from-violet-50 to-purple-50 hover:shadow-lg transition-all duration-300 border border-violet-100/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/5 to-purple-500/5 rounded-2xl transform group-hover:scale-[0.98] transition-transform duration-300"></div>
+            <div className="relative">
+              <div className="flex items-center mb-4">
+                <div className="p-2.5 bg-violet-600 rounded-xl">
+                  <CreditCard className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="ml-3 text-xl font-semibold text-gray-900">
+                  Secure Online Payments
+                </h3>
               </div>
+              <p className="text-gray-700 leading-relaxed">
+                Most California courts offer 24/7 online payment options. Find
+                your court above to access their official payment system and
+                settle your ticket securely from anywhere.
+              </p>
+            </div>
+          </div>
+
+          {/* Court Date Card */}
+          <div className="group relative p-6 rounded-2xl bg-gradient-to-br from-rose-50 to-pink-50 hover:shadow-lg transition-all duration-300 border border-rose-100/50">
+            <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-pink-500/5 rounded-2xl transform group-hover:scale-[0.98] transition-transform duration-300"></div>
+            <div className="relative">
+              <div className="flex items-center mb-4">
+                <div className="p-2.5 bg-rose-600 rounded-xl">
+                  <CalendarDays className="h-6 w-6 text-white" />
+                </div>
+                <h3 className="ml-3 text-xl font-semibold text-gray-900">
+                  Court Date Information
+                </h3>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                Need your court date? Search your court above to check
+                appearance schedules, get courthouse directions, and find
+                essential traffic division information all in one place.
+              </p>
             </div>
           </div>
         </div>
+
+        {/* Footer */}
+        <footer className="mt-16 max-w-4xl mx-auto">
+          <div className="p-6 bg-gradient-to-b from-gray-50 to-gray-100 rounded-xl border border-gray-200/80 shadow-sm">
+            <div className="flex items-center justify-center mb-3">
+              <div className="h-px w-12 bg-gray-200"></div>
+              <span className="mx-4 text-gray-400 text-sm font-medium uppercase tracking-wider">
+                Legal Notice
+              </span>
+              <div className="h-px w-12 bg-gray-200"></div>
+            </div>
+            <div className="space-y-2">
+              <p className="text-sm text-gray-600 leading-relaxed text-center">
+                This directory is provided by{" "}
+                <Link
+                  href="https://californiacarlaw.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 hover:text-[#3d8ab8] transition-colors"
+                >
+                  CaliforniaCarLaw.com
+                </Link>{" "}
+                as a free public service.
+              </p>
+              <p className="text-sm text-gray-600 leading-relaxed text-center">
+                We are not affiliated with, authorized by, or endorsed by any
+                government agency or court system. While we strive to maintain
+                accurate and up-to-date information, please verify all
+                information directly with your local court.
+              </p>
+            </div>
+          </div>
+        </footer>
       </div>
     </>
   );
