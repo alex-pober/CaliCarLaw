@@ -148,7 +148,7 @@ export default function FindYourCourt() {
   const [courts, setCourts] = useState<Courthouse[]>([]);
   const [loading, setLoading] = useState(false);
   const [allCourts, setAllCourts] = useState<Courthouse[]>([]);
-  const searchInputRef = useRef<HTMLDivElement>(null);
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const fetchAllCourts = async () => {
@@ -259,11 +259,16 @@ export default function FindYourCourt() {
   const handleInputFocus = () => {
     if (window.innerWidth <= 768) { // Mobile breakpoint
       setTimeout(() => {
-        searchInputRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
-      }, 100); // Small delay to ensure keyboard is shown
+        const inputElement = searchInputRef.current;
+        if (inputElement) {
+          const rect = inputElement.getBoundingClientRect();
+          const scrollPosition = window.scrollY + rect.top - 20; // 20px offset for padding
+          window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth',
+          });
+        }
+      }, 300); // Slight delay to allow keyboard to open
     }
   };
 
@@ -346,6 +351,7 @@ export default function FindYourCourt() {
             <div className="max-w-4xl flex-1 relative mx-auto">
               <Search className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
               <Input
+                ref={searchInputRef}
                 type="text"
                 placeholder="Search by city, county, or courthouse name..."
                 value={searchTerm}
@@ -354,7 +360,7 @@ export default function FindYourCourt() {
                   debouncedSearch(e.target.value);
                 }}
                 onFocus={handleInputFocus}
-                className="pl-10 h-12 text-lg w-full border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-lg shadow-lg placeholder:text-sm sm:placeholder:text-lg"
+                className="pl-10 h-12 text-lg w-full border border-gray-200 rounded-lg shadow-lg placeholder:text-sm sm:placeholder:text-lg bg-white"
               />
               {/*Badges*/}
               {searchTerm && (
