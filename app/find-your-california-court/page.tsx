@@ -3,7 +3,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import debounce from "lodash/debounce";
 import { Input } from "@/components/ui/input";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
@@ -148,6 +148,7 @@ export default function FindYourCourt() {
   const [courts, setCourts] = useState<Courthouse[]>([]);
   const [loading, setLoading] = useState(false);
   const [allCourts, setAllCourts] = useState<Courthouse[]>([]);
+  const searchInputRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const fetchAllCourts = async () => {
@@ -254,14 +255,55 @@ export default function FindYourCourt() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchTerm]);
 
+  // Handle input focus on mobile
+  const handleInputFocus = () => {
+    if (window.innerWidth <= 768) { // Mobile breakpoint
+      setTimeout(() => {
+        searchInputRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }, 100); // Small delay to ensure keyboard is shown
+    }
+  };
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: jsonString }}
-      />
-      <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
-        {/* Hero Section */}
+      <nav className="border-b border-gray-100 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16 items-center">
+            <Link
+              href="https://californiacarlaw.com"
+              className="flex items-center space-x-2"
+            >
+              <span className="text-xl font-semibold text-blue-600">
+                CaliforniaCarLaw
+              </span>
+              <span className="text-sm text-gray-500">Court Directory</span>
+            </Link>
+            <div className="flex items-center space-x-4">
+              <Link
+                href="https://californiacarlaw.com/contact"
+                className="text-gray-500 hover:text-gray-700 text-sm font-medium"
+              >
+                Contact
+              </Link>
+              <Link
+                href="https://californiacarlaw.com/blog"
+                className="text-gray-500 hover:text-gray-700 text-sm font-medium"
+              >
+                Blog
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <div className="min-h-screen bg-gray-50">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: jsonString }}
+        />
         <div className="mb-12 relative overflow-hidden p-2 md:p-12 w-full">
           <div className="max-w-4xl mx-auto bg-gradient-to-t from-[white] to-[transparent]">
             {/* Background Pattern */}
@@ -311,6 +353,7 @@ export default function FindYourCourt() {
                   setSearchTerm(e.target.value);
                   debouncedSearch(e.target.value);
                 }}
+                onFocus={handleInputFocus}
                 className="pl-10 h-12 text-lg w-full border border-gray-200 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 rounded-lg shadow-lg placeholder:text-sm sm:placeholder:text-lg"
               />
               {/*Badges*/}
@@ -614,7 +657,7 @@ export default function FindYourCourt() {
         </div>
 
         {/* Footer */}
-        <footer className="mt-16 max-w-4xl mx-auto">
+        <footer className="mt-16 max-w-6xl mx-auto">
           <div className="p-6 bg-gradient-to-b from-gray-50 to-gray-100 rounded-xl border border-gray-200/80 shadow-sm">
             <div className="flex items-center justify-center mb-3">
               <div className="h-px w-12 bg-gray-200"></div>
