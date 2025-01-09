@@ -316,7 +316,7 @@ export default function FindYourCourt() {
           dangerouslySetInnerHTML={{ __html: jsonString }}
         />
         <div className="mb-12 relative overflow-hidden p-2 md:p-12 w-full">
-          <div className="max-w-4xl mx-auto bg-gradient-to-t from-[white] to-[transparent]">
+          <div className="max-w-4xl mx-auto">
             {/* Background Pattern */}
             {/* <div className="absolute inset-0 opacity-30">
               <svg
