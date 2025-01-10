@@ -2,6 +2,7 @@ import { Html } from '@react-email/html'
 import { Text } from '@react-email/text'
 import { Section } from '@react-email/section'
 import { Container } from '@react-email/container'
+import { Img } from '@react-email/img'
 
 interface ConsultationRequestProps {
   name: string
@@ -15,7 +16,7 @@ export default function ConsultationRequest({ name, email, message }: Consultati
       <Section style={main}>
         <Container style={container}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Img
             src="https://www.californiacarlaw.com/images/logos/CaliforniaCarLaw-Logo.svg"
             alt="California Car Law"
             width="200"

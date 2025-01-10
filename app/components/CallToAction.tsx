@@ -7,16 +7,26 @@ export default function CallToAction() {
     success?: boolean;
     errors?: Record<string, string>;
   }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(formData: FormData) {
-    const result = await submitContactForm(formData);
-    setFormStatus(result);
-    
-    if (result.success) {
-      formRef.current?.reset();
-      // Reset form status after 5 seconds
-      setTimeout(() => setFormStatus({}), 5000);
+    console.log('Starting form submission...');
+    setIsSubmitting(true);
+    try {
+      const result = await submitContactForm(formData);
+      setFormStatus(result);
+      
+      if (result.success) {
+        formRef.current?.reset();
+        // Reset form status after 5 seconds
+        setTimeout(() => setFormStatus({}), 5000);
+      }
+    } catch (error) {
+      console.log('Form submission error:', error);
+      setFormStatus({ errors: { form: 'An error occurred. Please try again.' } });
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -124,9 +134,10 @@ export default function CallToAction() {
                 
                 <button
                   type="submit"
-                  className="w-full bg-[#50ade4] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#3d99d0] transition-colors"
+                  disabled={isSubmitting}
+                  className="w-full bg-[#50ade4] text-white py-3 px-6 rounded-lg font-semibold hover:bg-[#3d99d0] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Get Free Consultation
+                  {isSubmitting ? 'Sending...' : 'Get Free Consultation'}
                 </button>
                 
                 {formStatus.success ? (
