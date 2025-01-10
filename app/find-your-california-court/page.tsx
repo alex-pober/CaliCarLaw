@@ -13,7 +13,7 @@ import { MarkdownRenderer } from "@/lib/md-rendered";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { getAllCourtsAction } from "./actions";
+import { getAllCourtsAction, datasetAction } from "./actions";
 import {
   Search,
   MapPin,
@@ -51,70 +51,6 @@ interface Courthouse {
   }[];
 }
 
-// Map your day strings to Schema.org URIs
-const dayMappings = {
-  Monday: "Monday",
-  Tuesday: "Tuesday",
-  Wednesday: "Wednesday",
-  Thursday: "Thursday",
-  Friday: "Friday",
-  Saturday: "Saturday",
-  Sunday: "Sunday",
-};
-
-// Convert "8:00AM" or "12:30PM" to "08:00" or "12:30" in 24-hour format
-function convertTime12to24(timeStr: string) {
-  if (!timeStr || typeof timeStr !== "string") {
-    return "";
-  }
-
-  const match = timeStr.match(/(\d{1,2}:\d{2})\s*(AM|PM)/i);
-  if (!match) {
-    return "";
-  }
-
-  const [time, meridiem] = match.slice(1, 3);
-  let [hour, minute] = time.split(":").map(Number);
-
-  if (meridiem.toUpperCase() === "PM" && hour < 12) {
-    hour += 12; // e.g. 1 PM -> 13, 8 PM -> 20
-  }
-  if (meridiem.toUpperCase() === "AM" && hour === 12) {
-    // 12 AM is 00
-    hour = 0;
-  }
-
-  // Pad with leading zero if needed
-  const hourStr = hour.toString().padStart(2, "0");
-  const minuteStr = minute.toString().padStart(2, "0");
-
-  return `${hourStr}:${minuteStr}`;
-}
-
-// hoursObj is something like:
-// {
-//   "Friday": "8:00AM - 4:30PM",
-//   "Monday": "8:00AM - 4:30PM",
-//   ...
-// }
-
-function parseHoursToOpeningHoursSpecification(
-  hoursObj: JSON | { [s: string]: unknown } | ArrayLike<unknown>
-) {
-  return Object.entries(hoursObj).map(([day, timeRange]) => {
-    // timeRange: "8:00AM - 4:30PM"
-
-    const [openRaw, closeRaw] = timeRange.split(" - ");
-    return {
-      "@type": "OpeningHoursSpecification",
-      // @ts-ignore
-      dayOfWeek: dayMappings[day], // e.g. "https://schema.org/Monday"
-      opens: convertTime12to24(openRaw), // e.g. "08:00"
-      closes: convertTime12to24(closeRaw), // e.g. "16:30"
-    };
-  });
-}
-
 const formatHours = (hoursObj: any) => {
   if (!hoursObj) return "Hours not available";
 
@@ -150,72 +86,25 @@ export default function FindYourCourt() {
   const [courts, setCourts] = useState<Courthouse[]>([]);
   const [loading, setLoading] = useState(false);
   const [allCourts, setAllCourts] = useState<Courthouse[]>([]);
+  const [dataset, setDataset] = useState<any[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const fetchAllCourts = async () => {
+    const fetchData = async () => {
       try {
-        const courts = await getAllCourtsAction();
+        const [courts, datasetResult] = await Promise.all([
+          getAllCourtsAction(),
+          datasetAction()
+        ]);
         setAllCourts(courts);
+        setDataset(datasetResult);
       } catch (error) {
-        console.log("Error fetching all courts:", error);
+        console.log('Error fetching data:', error);
       }
     };
 
-    fetchAllCourts();
+    fetchData();
   }, []);
-
-  // Convert each courthouse to a JSON-LD object
-  const courtsData = allCourts.map((court) => {
-    return {
-      "@context": "https://schema.org",
-      "@type": "GovernmentOffice",
-      name: court.courthouse_name,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: court.address,
-        addressRegion: "CA",
-        addressCountry: "US",
-        addressState: "CA",
-      },
-      telephone: court.phone_number,
-      url: getMainDomain(court.courthouse_page_url),
-      openingHoursSpecification: parseHoursToOpeningHoursSpecification(
-        court.hours_building
-      ),
-      image: court.photo,
-      amenityFeature: [
-        {
-          "@type": "LocationFeatureSpecification",
-          name: "Parking",
-          value: court.parking,
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          name: "Public Transportation",
-          value: court.transportation,
-        },
-      ],
-      // Additional data
-      additionalProperty: [
-        {
-          "@type": "PropertyValue",
-          name: "Matters Served",
-          value: court.matters_served,
-        },
-        {
-          "@type": "PropertyValue",
-          name: "More Info",
-          value: court.more_info,
-        },
-        // etc.
-      ],
-    };
-  });
-  // Convert the array of objects to a JSON string
-
-  // const jsonString = JSON.stringify(courtsData, null, 2);
-  // console.log(jsonString, null, 2);
 
   const searchCourts = async (term: string) => {
     if (!term) {
@@ -277,9 +166,15 @@ export default function FindYourCourt() {
 
   return (
     <>       
-     <Script id="court-directory-jsonld" type="application/ld+json" strategy="beforeInteractive">
-      {JSON.stringify(courtsData)}
-     </Script>
+      {dataset.length > 0 && (
+        <Script
+          id="court-directory-jsonld"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(dataset, null, 2),
+          }}
+        />
+      )}
       <nav className="border-b border-gray-100 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
@@ -623,7 +518,7 @@ export default function FindYourCourt() {
               <p className="text-gray-700 leading-relaxed">
                 Search your court above to access their ticket lookup system.
                 Get instant access to your citation details, fine amounts, and
-                case information through your court's official portal.
+                case information through your court&apos;s official portal.
               </p>
             </div>
           </div>
