@@ -1,8 +1,10 @@
+'use client';
 import WhyChooseUs from './components/WhyChooseUs';
 import OurServices from './components/OurServices';
 import Navbar from './components/Navbar';
 import Image from 'next/image';
 import {FolderSearch2, Scale} from 'lucide-react';
+import CallToAction from './components/CallToAction';
 
 export default function Home() {
   return (
@@ -59,7 +61,7 @@ export default function Home() {
         </div>
 
         {/* California Courts Directory Section */}
-        <div className=" mt-4 sm:mt-6 lg:mt-8 xl:mt-24 max-w-7xl mx-auto p-4 sm:p-2">
+        <section className="m-4 sm:m-6 md:mx-auto xl:mt-24 max-w-7xl">
           <div className="relative overflow-hidden bg-gradient-to-br from-[#50ade4] to-[#2980b9] rounded-2xl p-8 md:p-12 shadow-xl">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-10">
@@ -74,10 +76,10 @@ export default function Home() {
             <div className="relative flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-1 space-y-6">
                 <h2 className="text-4xl md:text-5xl font-bold text-white flex items-center sm:gap-3">
-                  California Courts Directory <Scale className="w-24 h-24 md:w-12 md:h-12" />
+                  California Courts Directory <Scale className="w-24 h-24 sm:h-24 md:h-24 lg:h-12" />
                 </h2>
                 <p className="text-xl text-white/90">
-                  The California legal system can be tough to navigate, so we’ve simplified it for you. Our complete court directory has everything you need—from paying traffic fines to handling legal matters—quickly and easily.                </p>
+                  The California legal system can be tough to navigate, so we&apos;ve simplified it for you. Our complete court directory has everything you need—from paying traffic fines to handling legal matters—quickly and easily.                </p>
                 <a 
                   href="/find-your-california-court"
                   className="inline-flex items-center gap-2 bg-white text-[#50ade4] hover:bg-gray-100 font-semibold rounded-full px-8 py-4 transition-all transform hover:scale-105 group"
@@ -100,18 +102,20 @@ export default function Home() {
               </div>
 
               {/* Decorative Icon */}
-              <div className="flex-shrink-0 w-48 h-48 relative">
+              <div className="hidden sm:hidden md:block flex-shrink-0 w-48 h-48 relative">
                 <div className="absolute inset-0 bg-white/10 rounded-full flex items-center justify-center">
                   <FolderSearch2 className="w-20 h-20 text-white" />
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <OurServices />
 
         <WhyChooseUs />
+        
+        <CallToAction />
         
       </main>
 

@@ -165,7 +165,7 @@ export default function FindYourCourt() {
   };
 
   return (
-    <>       
+    <div className="bg-gray-50">       
       {dataset.length > 0 && (
         <Script
           id="court-directory-jsonld"
@@ -175,8 +175,8 @@ export default function FindYourCourt() {
           }}
         />
       )}
-      <nav className="border-b border-gray-100 bg-white">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="drop-shadow-sm max-w-6xl mx-auto">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
             <Link
               href="https://californiacarlaw.com"
@@ -185,12 +185,11 @@ export default function FindYourCourt() {
               <Image
                 src="/images/logos/CaliforniaCarLaw-Logo.svg"
                 alt="California Car Law"
-                width={120}
+                width={150}
                 height={32}
-                className="h-16 w-auto p-1"
+                className="p-4"
                 priority
               />
-              <span className="text-sm text-gray-500">Court Directory</span>
             </Link>
             <div className="flex items-center space-x-4">
               <Link
@@ -262,11 +261,11 @@ export default function FindYourCourt() {
                   debouncedSearch(e.target.value);
                 }}
                 onFocus={handleInputFocus}
-                className="pl-10 h-12 text-lg w-full border border-gray-200 rounded-lg shadow-lg placeholder:text-sm sm:placeholder:text-lg bg-white"
+                className="pl-10 h-12 text-lg w-full border border-gray-200 rounded-lg shadow-lg placeholder:text-sm sm:placeholder:text-lg bg-white mb-4"
               />
               {/*Badges*/}
               {searchTerm && (
-                <div className="my-3 flex items-center gap-2">
+                <div className="mb-4 flex items-center gap-2">
                   <Badge
                     variant={
                       courts.length === 0 && !loading
@@ -597,6 +596,6 @@ export default function FindYourCourt() {
           </div>
         </footer>
       </div>
-    </>
+    </div>
   );
 }

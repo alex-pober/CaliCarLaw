@@ -12,9 +12,9 @@ export default function Navbar() {
               <Image
                 src="/images/logos/CaliforniaCarLaw-Logo.svg"
                 alt="California Car Law"
-                width={120}
+                width={150}
                 height={32}
-                className="h-16 w-auto p-1"
+                className="p-4"
                 priority
               />
             </a>
@@ -28,14 +28,14 @@ export default function Navbar() {
           {/* Phone number and CTA */}
           <div className="flex items-center gap-4 sm:gap-6">
             <a 
-              href="tel:+18885555555" 
+              href="tel:+16575225292" 
               className="hidden sm:flex items-center gap-1 text-gray-600 hover:text-[#50ade4] transition-colors"
             >
               <Phone className="h-4 w-4" />
-              <span className="font-medium">(888) 555-5555</span>
+              <span className="font-medium">(657) 522-5292</span>
             </a>
             
-            <button className="rounded-full border border-solid border-transparent bg-[#50ade4] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium whitespace-nowrap">
+            <button className="rounded-full border border-solid border-transparent bg-[#132b49] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium whitespace-nowrap">
               Free Consultation
             </button>
           </div>

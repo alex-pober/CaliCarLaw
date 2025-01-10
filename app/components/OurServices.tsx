@@ -25,37 +25,38 @@ const services = [
 
 export default function OurServices() {
   return (
-    <section className="mt-4 sm:mt-6 lg:mt-8 xl:mt-12 max-w-7xl mx-auto p-2 md:p-0 mb-12">
-      <div className="container px-4 sm:px-4">
-        <div className="mx-auto max-w-screen-xl">
-          <div className="flex flex-col items-center justify-between gap-y-4 md:flex-row">
-            <h2 className="text-left text-2xl font-bold md:text-4xl">
-              For everything else that needs a <span className="text-[#50ade4]">legal team</span> or <span className="text-[#50ade4]">lawyer</span> 
-              <br/> 
-              we got you covered for:
-            </h2>
-            {/* <button className="inline-flex items-center justify-center whitespace-nowrap text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#50ade4] focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-[#50ade4]/10 h-11 rounded-md px-8">
-              View All Services
-            </button> */}
-          </div>
+    <section className="m-4 sm:m-6 md:mx-auto bg-white border border-gray-200 rounded-2xl drop-shadow-md max-w-7xl mt-12">
+      <div className=" mx-auto max-w-7xl p-8 md:p-12">
+        <div className="flex flex-col items-start max-w-3xl mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Legal Services Tailored to Your Needs
+          </h2>
+          <p className="text-lg text-gray-600">
+            Expert legal representation for California drivers facing:
+          </p>
+        </div>
 
-          <div className="mt-8 grid gap-6 md:mt-12 md:grid-cols-2 lg:grid-cols-4">
-            {services.map((service, index) => (
-              <div key={index} className="rounded-xl border bg-gray-50/50 p-6">
-                <div className="flex flex-row items-center gap-4 mb-6">
-                  <div className="inline-flex h-16 w-16 items-center justify-center rounded-lg bg-[#50ade4]/10">
-                    <service.icon className="h-8 w-8 text-[#50ade4]" />
-                  </div>
-                  <h4 className="text-2xl font-semibold">
-                    {service.title}
-                  </h4>
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          {services.map((service, index) => (
+            <div 
+              key={index} 
+              className="group relative overflow-hidden rounded-2xl  "
+            >
+              <div className="absolute top-0 left-0 h-1 w-full bg-[#50ade4] transform origin-left scale-x-0 transition-transform group-hover:scale-x-100" />
+              <div className="p-6">
+                <div className="flex flex-row align-center items-center gap-4 mb-4">
+                <h3 className="text-xl font-bold text-gray-900">
+                  {service.title}
+                </h3>
+                  <service.icon className="h-8 w-8 text-[#50ade4]" />
                 </div>
-                <p className="text-lg text-gray-600">
+                <p className="text-gray-600">
                   {service.description}
                 </p>
               </div>
-            ))}
-          </div>
+              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#50ade4]/50 to-transparent" />
+            </div>
+          ))}
         </div>
       </div>
     </section>

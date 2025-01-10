@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: "https://www.calicarlaw.com",
+    canonical: "https://www.californiacarlaw.com",
   },
 };
 
