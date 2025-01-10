@@ -31,7 +31,7 @@ export default function CallToAction() {
   }
 
   return (
-    <section className="relative py-20 overflow-hidden">
+    <section id="free-consultation" className="relative py-20 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#50ade4]/10 to-transparent" />
       

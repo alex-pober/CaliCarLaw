@@ -49,7 +49,15 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-                <button className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-[#50ade4] text-white gap-2 hover:bg-[#3d99d0] text-base h-12 px-8 font-medium w-full sm:w-auto">
+                <button 
+                  onClick={() => {
+                    document.getElementById('free-consultation')?.scrollIntoView({ 
+                      behavior: 'smooth',
+                      block: 'start'
+                    });
+                  }}
+                  className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-[#50ade4] text-white gap-2 hover:bg-[#3d99d0] text-base h-12 px-8 font-medium w-full sm:w-auto"
+                >
                   Get a Free Case Evaluation
                 </button>
                 <p className="text-sm text-center sm:text-left text-gray-600 dark:text-gray-400">

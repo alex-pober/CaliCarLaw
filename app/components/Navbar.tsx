@@ -35,7 +35,15 @@ export default function Navbar() {
               <span className="font-medium">(657) 522-5292</span>
             </a>
             
-            <button className="rounded-full border border-solid border-transparent bg-[#132b49] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium whitespace-nowrap">
+            <button 
+              onClick={() => {
+                document.getElementById('free-consultation')?.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }}
+              className="rounded-full border border-solid border-transparent bg-[#132b49] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium whitespace-nowrap"
+            >
               Free Consultation
             </button>
           </div>
