@@ -28,6 +28,7 @@ import {
   Clock,
   ExternalLink,
 } from "lucide-react";
+import Script from "next/script";
 
 interface Courthouse {
   more_info: string;
@@ -274,7 +275,10 @@ export default function FindYourCourt() {
   };
 
   return (
-    <>
+    <>       
+     <Script id="court-directory-jsonld" type="application/ld+json">
+      {JSON.stringify(courtsData)}
+     </Script>
       <nav className="border-b border-gray-100 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16 items-center">
@@ -311,10 +315,6 @@ export default function FindYourCourt() {
       </nav>
 
       <div className="min-h-screen bg-gray-50">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: jsonString }}
-        />
         <div className="mb-12 relative overflow-hidden p-2 md:p-12 w-full">
           <div className="max-w-4xl mx-auto">
             {/* Background Pattern */}
