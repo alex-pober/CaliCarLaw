@@ -277,7 +277,7 @@ export default function FindYourCourt() {
 
   return (
     <>       
-     <Script id="court-directory-jsonld" type="application/ld+json">
+     <Script id="court-directory-jsonld" type="application/ld+json" strategy="beforeInteractive">
       {JSON.stringify(courtsData)}
      </Script>
       <nav className="border-b border-gray-100 bg-white">
