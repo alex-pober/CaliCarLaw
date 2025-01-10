@@ -214,7 +214,8 @@ export default function FindYourCourt() {
   });
   // Convert the array of objects to a JSON string
 
-  const jsonString = JSON.stringify(courtsData, null, 2);
+  // const jsonString = JSON.stringify(courtsData, null, 2);
+  // console.log(jsonString, null, 2);
 
   const searchCourts = async (term: string) => {
     if (!term) {
