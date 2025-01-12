@@ -25,7 +25,7 @@ const features = [
 
 export default function WhyChooseUs() {
   return (
-    <section className="w-full py-16 bg-gradient-to-t from-[#50ade4]/10 to-transparent">
+    <section className="w-full py-16">
       <div className="px-4 w-full max-w-7xl mx-auto">
         <div className="max-w-2xl mx-auto text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-gray-900">What Sets Us Apart</h2>
