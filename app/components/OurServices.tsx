@@ -9,7 +9,7 @@ const services = [
   {
     icon: Wine,
     title: "DUI Defense",
-    description: "Don't let one mistake define you—fight your charges today."
+    description: "Don't let one mistake define you, fight your charges today."
   },
   {
     icon: FileWarning,

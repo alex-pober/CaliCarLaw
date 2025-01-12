@@ -8,7 +8,7 @@ import CallToAction from './components/CallToAction';
 
 export default function Home() {
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)]">
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-gradient-to-b from-transparent to-[#50ade4]/10">
       <Navbar />
       <main className="flex flex-col">
         <div className="p-8 sm:p-12 md:p-16 lg:p-20">
@@ -41,7 +41,7 @@ export default function Home() {
               </div>
 
               <p className="text-black font-bold sm:font-medium backdrop-blur-sm rounded-lg  lg:bg-transparent text-lg md:text-xl sm:text-gray-600 dark:text-gray-300 text-center sm:text-left leading-relaxed max-w-sm xl:max-w-xl">
-                Revolutionizing Legal Services with AI-Powered Efficiency—
+                Revolutionizing Legal Services with AI-Powered Efficiency,
                 <span className="text-[#50ade4] font-semibold">
                   Outperforming Traditional Firms
                 </span>{" "}
@@ -87,7 +87,7 @@ export default function Home() {
                   California Courts Directory <Scale className="w-24 h-24 sm:h-24 md:h-24 lg:h-12" />
                 </h2>
                 <p className="text-xl text-white/90">
-                  The California legal system can be tough to navigate, so we&apos;ve simplified it for you. Our complete court directory has everything you need—from paying traffic fines to handling legal matters—quickly and easily.                </p>
+                  The California legal system can be tough to navigate, so we&apos;ve simplified it for you. Our complete court directory has everything you need, from paying traffic fines to handling legal matters, quickly and easily.                </p>
                 <a 
                   href="/find-your-california-court"
                   className="inline-flex items-center gap-2 bg-white text-[#50ade4] hover:bg-gray-100 font-semibold rounded-full px-8 py-4 transition-all transform hover:scale-105 group"
@@ -152,13 +152,12 @@ export default function Home() {
           </a>
           <span className="select-none">•</span>
           <a
-            href="/contact"
+            href="/contact-us"
             className="hover:text-[#50ade4] transition-colors"
           >
             Contact Us
           </a>
         </nav>
-
         <div className="flex gap-6 items-center justify-center">
           <a
             href="#"
