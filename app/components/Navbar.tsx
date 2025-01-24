@@ -1,7 +1,9 @@
 import { Phone } from 'lucide-react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
+  const router = useRouter();
   return (
     <nav className="w-full border-b">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,6 +36,13 @@ export default function Navbar() {
               <Phone className="h-4 w-4" />
               <span className="font-medium">(657) 522-5292</span>
             </a>
+
+            <button 
+              onClick={() => router.push('/free-trial-by-declaration')}
+              className="rounded-full border border-solid border-transparent bg-[#132b49] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium whitespace-nowrap"
+            >
+              Fight your ticket for free
+            </button>
             
             <button 
               onClick={() => {
