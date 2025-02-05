@@ -2,6 +2,7 @@ import { fetchBySlug } from "@/lib/notion";
 import { notion } from "@/notion";
 import { NotionPage } from "@/app/components/notion/index";
 import { cacheLife } from "next/dist/server/use-cache/cache-life";
+import { Suspense } from 'react';
 
 async function getData(rootPageId: string) {
   'use cache';
@@ -28,9 +29,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
     const blog = await getData(post.id);
 
     return (
-      <main className="max-w-5xl mx-auto">
-        <NotionPage recordMap={blog} rootPageId={post.id} />
-      </main>
+      <Suspense fallback={<div>Loading...</div>}>
+        <main className="max-w-5xl mx-auto">
+          <NotionPage recordMap={blog} rootPageId={post.id} />
+        </main>
+      </Suspense>
     );
 
   } catch (error) {
