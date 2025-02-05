@@ -5,12 +5,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import debounce from "lodash/debounce";
-import { Input } from "@/components/ui/input";
-import { Card, CardHeader, CardContent } from "@/components/ui/card";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Badge } from "@/components/ui/badge";
+import { Input } from "@/app/components/ui/input";
+import { Card, CardHeader, CardContent } from "@/app/components/ui/card";
+import { Skeleton } from "@/app/components/ui/skeleton";
+import { Badge } from "@/app/components/ui/badge";
 import { MarkdownRenderer } from "@/lib/md-rendered";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/app/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllCourtsAction, datasetAction } from "./actions";
@@ -165,7 +165,7 @@ export default function FindYourCourt() {
   };
 
   return (
-    <div className="bg-gray-50">       
+    <div className="bg-gray-50">
       {dataset.length > 0 && (
         <Script
           id="court-directory-jsonld"

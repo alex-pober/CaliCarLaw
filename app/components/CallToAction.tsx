@@ -16,7 +16,7 @@ export default function CallToAction() {
     try {
       const result = await submitContactForm(formData);
       setFormStatus(result);
-      
+
       if (result.success) {
         formRef.current?.reset();
         // Reset form status after 5 seconds
@@ -34,7 +34,7 @@ export default function CallToAction() {
     <section id="free-consultation" className="relative py-20 overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0" />
-      
+
       <div className="relative max-w-7xl mx-auto px-4">
         <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
           <div className="flex flex-col lg:flex-row">
@@ -46,7 +46,7 @@ export default function CallToAction() {
               <p className="text-lg text-gray-600 mb-8">
                 Our team is available to discuss your case and provide the expert legal guidance you need.
               </p>
-              
+
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#50ade4]/10 flex items-center justify-center">
@@ -59,21 +59,21 @@ export default function CallToAction() {
                     </a>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center gap-3">
                   <div className="flex-shrink-0 w-12 h-12 rounded-full bg-[#50ade4]/10 flex items-center justify-center">
                     <Mail className="w-6 h-6 text-[#50ade4]" />
                   </div>
                   <div>
                     <p className="text-sm text-gray-600">Email us</p>
-                    <a href="mailto:contact@californiacarlaw.com" className="text-lg font-semibold text-[#50ade4] hover:underline">
-                      contact@californiacarlaw.com
+                    <a href="mailto:info@calicarlaw.com" className="text-lg font-semibold text-[#50ade4] hover:underline">
+                      info@calicarlaw.com
                     </a>
                   </div>
                 </div>
               </div>
             </div>
-            
+
             {/* Right Side - Form */}
             <div className="flex-1 p-8 lg:p-12 bg-gray-50 border-t lg:border-t-0 lg:border-l border-gray-100">
               <form onSubmit={(e) => {
@@ -97,7 +97,7 @@ export default function CallToAction() {
                     <p className="mt-1 text-sm text-red-500">{formStatus.errors.name}</p>
                   )}
                 </div>
-                
+
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
                     Email
@@ -114,7 +114,7 @@ export default function CallToAction() {
                     <p className="mt-1 text-sm text-red-500">{formStatus.errors.email}</p>
                   )}
                 </div>
-                
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
                     Brief Description of Your Case
@@ -131,7 +131,7 @@ export default function CallToAction() {
                     <p className="mt-1 text-sm text-red-500">{formStatus.errors.message}</p>
                   )}
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -139,7 +139,7 @@ export default function CallToAction() {
                 >
                   {isSubmitting ? 'Sending...' : 'Get Free Consultation'}
                 </button>
-                
+
                 {formStatus.success ? (
                   <p className="text-sm text-green-600 text-center mt-4">
                     Thank you! We&apos;ll get back to you shortly.
