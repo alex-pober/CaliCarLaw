@@ -14,6 +14,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.californiacarlaw.com'),
   title: "California Car Law | AI-Powered Legal Services for Car Accidents, DUI & Traffic Cases",
   description: "Expert legal representation across California for car accidents, DUI defense, traffic tickets, and lemon law cases. Available 24/7 with AI-powered efficiency for faster results. Serving all California counties.",
   keywords: "California car accident lawyer, California DUI attorney, traffic ticket lawyer California, lemon law California, car accident legal services, AI-powered law firm, 24/7 legal help California",

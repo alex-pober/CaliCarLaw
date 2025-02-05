@@ -1,43 +1,35 @@
-import { fetchBySlug } from "@/lib/notion";
+import { Suspense } from "react";
 import { notion } from "@/notion";
 import { NotionPage } from "@/app/components/notion/index";
-import { cacheLife } from "next/dist/server/use-cache/cache-life";
-import { Suspense } from 'react';
+import { fetchBySlug } from "@/lib/notion";
 
-async function getData(rootPageId: string) {
-  'use cache';
-  cacheLife('hours')
-  return await notion.getPage(rootPageId);
+async function getBlogPost(params: Promise<{ slug: string }>) {
+  const { slug } = await params;
+  const post = await fetchBySlug(slug);
+  const blog = await notion.getPage(post.id);
+  return { blog, post };
 }
 
-async function getSlug(slug: string) {
-  'use cache';
-  cacheLife('hours')
-  return await fetchBySlug(slug);
+export default function Page(props: { params: Promise<{ slug: string }> }) {
+  const blogPostPromise = getBlogPost(props.params);
+
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <BlogContent blogPostPromise={blogPostPromise} />
+    </Suspense>
+  );
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-  const { slug } = await params; // Ensure params are correctly accessed
+async function BlogContent({
+  blogPostPromise,
+}: {
+  blogPostPromise: Promise<{ blog: any; post: any }>;
+}) {
+  const { blog, post } = await blogPostPromise;
 
-  try {
-    const post = await getSlug(slug);
-
-    if (!post?.id) {
-      throw new Error(`Invalid or missing post for slug: ${slug}`);
-    }
-
-    const blog = await getData(post.id);
-
-    return (
-      <Suspense fallback={<div>Loading...</div>}>
-        <main className="max-w-5xl mx-auto">
-          <NotionPage recordMap={blog} rootPageId={post.id} />
-        </main>
-      </Suspense>
-    );
-
-  } catch (error) {
-    console.error('Error fetching post:', error);
-    return <div className="text-center text-red-500">Error loading page.</div>;
-  }
+  return (
+    <main className="max-w-5xl mx-auto">
+      <NotionPage recordMap={blog} rootPageId={post.id} />
+    </main>
+  );
 }
