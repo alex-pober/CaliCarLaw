@@ -35,7 +35,7 @@ export default async function BlogPage() {
                 className="block p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-gray-100"
               >
                 <div className="flex justify-between items-start mb-3">
-                  <h2 className="text-xl font-semibold text-gray-900">{blog.properties.Title.title[0]?.plain_text}</h2>
+                  <h1 className="text-xl font-semibold text-gray-900">{blog.properties.Title.title[0]?.plain_text}</h2>
                   {blog.properties.Date?.date?.start && (
                     <span className="text-sm text-gray-500 whitespace-nowrap">
                       {new Date(blog.properties.Date.date.start).toLocaleDateString('en-US', {

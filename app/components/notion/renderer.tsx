@@ -45,7 +45,7 @@ export const NotionPage = ({ recordMap, rootPageId }: NotionPageProps) => {
           Code,
           Collection,
           Equation,
-          Modal,
+          Modal
         }}
       />
     </div>

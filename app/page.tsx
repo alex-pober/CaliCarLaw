@@ -41,7 +41,7 @@ export default function Home() {
               </div>
 
               <p className="text-black font-bold sm:font-medium backdrop-blur-sm rounded-lg  lg:bg-transparent text-lg md:text-xl sm:text-gray-600 dark:text-gray-300 text-center sm:text-left leading-relaxed max-w-sm xl:max-w-xl">
-                Revolutionizing Legal Services with AI-Powered Efficiency,
+                Revolutionizing Legal Services with AI-Powered Efficiency,{" "}
                 <span className="text-[#50ade4] font-semibold">
                   Outperforming Traditional Firms
                 </span>{" "}
@@ -49,9 +49,9 @@ export default function Home() {
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-                <button 
+                <button
                   onClick={() => {
-                    document.getElementById('free-consultation')?.scrollIntoView({ 
+                    document.getElementById('free-consultation')?.scrollIntoView({
                       behavior: 'smooth',
                       block: 'start'
                     });
@@ -80,7 +80,7 @@ export default function Home() {
                 <rect width="100%" height="100%" fill="url(#grid)" />
               </svg>
             </div>
-            
+
             <div className="relative flex flex-col md:flex-row gap-8 items-center">
               <div className="flex-1 space-y-6">
                 <h2 className="text-4xl md:text-5xl font-bold text-white flex items-center sm:gap-3">
@@ -88,21 +88,21 @@ export default function Home() {
                 </h2>
                 <p className="text-xl text-white/90">
                   The California legal system can be tough to navigate, so we&apos;ve simplified it for you. Our complete court directory has everything you need, from paying traffic fines to handling legal matters, quickly and easily.                </p>
-                <a 
+                <a
                   href="/find-your-california-court"
                   className="inline-flex items-center gap-2 bg-white text-[#50ade4] hover:bg-gray-100 font-semibold rounded-full px-8 py-4 transition-all transform hover:scale-105 group"
                 >
                   Find Your Local Court
-                  <svg 
-                    className="w-5 h-5 transform transition-transform group-hover:translate-x-1" 
-                    fill="none" 
-                    stroke="currentColor" 
+                  <svg
+                    className="w-5 h-5 transform transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
                       d="M9 5l7 7-7 7"
                     />
                   </svg>
@@ -122,9 +122,9 @@ export default function Home() {
         <OurServices />
 
         <WhyChooseUs />
-        
+
         <CallToAction />
-        
+
       </main>
 
       <footer className="flex flex-col gap-6 items-center justify-center w-full py-16">
