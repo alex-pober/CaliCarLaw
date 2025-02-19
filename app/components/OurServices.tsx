@@ -28,18 +28,18 @@ export default function OurServices() {
     <section className="m-4 sm:m-6 md:mx-auto bg-white border border-gray-200 rounded-2xl drop-shadow-md max-w-7xl mt-12">
       <div className=" mx-auto max-w-7xl p-8 md:p-12">
         <div className="flex flex-col items-start max-w-3xl mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Legal Services Tailored to Your Needs
-          </h2>
-          <p className="text-lg text-gray-600">
-            Expert legal representation for California drivers facing:
+          <p className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+            Don&apos;t Trust Yourself? Trust Us Instead
           </p>
+          <h2 className="text-lg text-gray-600">
+            Expert legal services for California drivers facing:
+          </h2>
         </div>
 
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (
-            <div 
-              key={index} 
+            <div
+              key={index}
               className="group relative overflow-hidden rounded-2xl  "
             >
               <div className="absolute top-0 left-0 h-1 w-full bg-[#50ade4] transform origin-left scale-x-0 transition-transform group-hover:scale-x-100" />
