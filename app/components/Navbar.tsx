@@ -10,7 +10,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleConsultationClick = () => {
-    document.getElementById('free-consultation')?.scrollIntoView({ 
+    document.getElementById('free-consultation')?.scrollIntoView({
       behavior: 'smooth',
       block: 'start'
     });
@@ -37,22 +37,22 @@ export default function Navbar() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:items-center md:space-x-4">
-            <a 
-              href="tel:+16575225292" 
+            <a
+              href="tel:+16575225292"
               className="flex items-center gap-1 text-gray-600 hover:text-[#50ade4] transition-colors"
             >
               <Phone className="h-4 w-4" />
               <span className="font-medium">(657) 522-5292</span>
             </a>
 
-            <button 
-              onClick={() => router.push('/free-trial-by-declaration')}
+            <button
+              onClick={() => router.push('/trial-by-declaration')}
               className="rounded-full border border-solid border-transparent bg-[#132b49] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium whitespace-nowrap"
             >
               Fight your ticket for free
             </button>
-            
-            <button 
+
+            <button
               onClick={handleConsultationClick}
               className="rounded-full border border-solid border-transparent bg-[#132b49] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium whitespace-nowrap"
             >
@@ -78,8 +78,8 @@ export default function Navbar() {
       {isMenuOpen && (
         <div className="md:hidden absolute top-16 left-0 w-full bg-white border-b shadow-lg z-50">
           <div className="px-4 pt-2 pb-4 space-y-3">
-            <a 
-              href="tel:+16575225292" 
+            <a
+              href="tel:+16575225292"
               className="flex items-center gap-1 text-gray-600 hover:text-[#50ade4] transition-colors p-2"
             >
               <Phone className="h-4 w-4" />
@@ -87,17 +87,17 @@ export default function Navbar() {
             </a>
 
             <div className="flex flex-col gap-2">
-              <button 
+              <button
                 onClick={() => {
-                  router.push('/free-trial-by-declaration');
+                  router.push('/trial-by-declaration');
                   setIsMenuOpen(false);
                 }}
                 className="w-full rounded-full border border-solid border-transparent bg-[#132b49] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium"
               >
                 Fight your ticket for free
               </button>
-              
-              <button 
+
+              <button
                 onClick={handleConsultationClick}
                 className="w-full rounded-full border border-solid border-transparent bg-[#132b49] text-white hover:bg-[#3d99d0] transition-colors text-sm px-4 h-9 font-medium"
               >

@@ -54,7 +54,7 @@ const jsonLd = {
   name: "CaliforniaCarLaw Trial by Declaration Service",
   description:
     "Fight your traffic ticket with Trial by Declaration in California for free with our form generator.",
-  url: "https://calicarlaw.com/free-trial-by-declaration",
+  url: "https://calicarlaw.com/trial-by-declaration",
   areaServed: {
     "@type": "State",
     name: "California",
