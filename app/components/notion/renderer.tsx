@@ -38,7 +38,7 @@ export const NotionPage = ({ recordMap, rootPageId }: NotionPageProps) => {
     <div className="notion__container">
       <NotionRenderer
         recordMap={recordMap}
-        fullPage={false}
+        fullPage={true}
         darkMode={false}
         rootPageId={rootPageId}
         components={{

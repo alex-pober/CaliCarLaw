@@ -13,7 +13,7 @@ export default function BlogLayout({ children }: { children: ReactNode }) {
     <>
       <Navbar />
       <div className="min-h-screen flex flex-col bg-[#f5f5f7]">
-        <main className="flex-1 container mx-auto px-4 ">{children}</main>
+        <main className="px-4 ">{children}</main>
       </div>
     </>
   );

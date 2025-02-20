@@ -34,10 +34,10 @@ async function BlogContent({
   const { blog, post } = await blogPostPromise;
 
   return (
-    <main className="max-w-5xl mx-auto">
-      <div className="flex justify-center">
-        <h1 className="max-w-[684px] text-3xl font-semibold text-gray-800 mt-4 text-left">{post.properties.Title.title[0].plain_text}</h1>
-      </div>
+    <main className="max-w-4xl mx-auto">
+      {/* <div className="flex justify-center">
+        <h1 className="max-w-[684px] text-3xl font-semibold text-gray-800 mt-12 text-left">{post.properties.Title.title[0].plain_text}</h1>
+      </div> */}
       <NotionPage recordMap={blog} rootPageId={post.id} />
     </main>
   );

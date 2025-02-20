@@ -6,9 +6,26 @@ body {
   scrollbar-gutter: stable both-edges;
 }
 
+.notion {
+  background: none !important;
+}
+
 .notion__container .notion-header {
   display: none !important;
 }
+
+.notion-page {
+  width: auto !important;
+}
+
+.notion-hr {
+  width: 100% !important;
+  height: 1px !important;
+  visibility: visible !important;
+  border-bottom: 1px solid rgb(220, 220, 220) !important;
+  margin-top: 1rem !important;
+}
+
 
 
 /* General Styling */
