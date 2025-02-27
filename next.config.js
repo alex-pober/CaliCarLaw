@@ -17,7 +17,8 @@ const nextConfig = {
   experimental: {
     // This is experimental but can be enabled to ignore certain webpack errors
     forceSwcTransforms: true,
-    dynamicIO: true,
+    // Removing dynamicIO as it requires the latest canary version
+    // dynamicIO: true,
   }
 }
 

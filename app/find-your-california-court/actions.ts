@@ -5,7 +5,7 @@
 import { createClient } from "@/utils/supabase/client";
 
 export async function getAllCourtsAction() {
-  "use cache";
+  // "use cache";
   const supabase = createClient();
 
   const { data, error } = await supabase.from("courthouses").select("*");
@@ -19,7 +19,7 @@ export async function getAllCourtsAction() {
 }
 
 export async function datasetAction() {
-  "use cache";
+  // "use cache";
   const allCourts = await getAllCourtsAction();
   // Map your day strings to Schema.org URIs
   const dayMappings = {

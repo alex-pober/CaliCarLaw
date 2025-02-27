@@ -5,8 +5,8 @@ import Link from 'next/link';
 import { BlogPost } from '@/types/blog';
 
 async function getLivePosts() {
-  "use cache"
-  cacheLife('hours')
+  // "use cache"
+  // cacheLife('hours')
   return fetchPages();
 }
 
