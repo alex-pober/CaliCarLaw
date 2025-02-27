@@ -71,16 +71,6 @@ const formatHours = (hoursObj: any) => {
     .join("\n");
 };
 
-const getMainDomain = (url: string) => {
-  try {
-    const urlObj = new URL(url);
-    return `${urlObj.protocol}//${urlObj.hostname}`;
-  } catch (e) {
-    console.log("Invalid URL:", url);
-    return url;
-  }
-};
-
 export default function FindYourCourt() {
   const [searchTerm, setSearchTerm] = useState("");
   const [courts, setCourts] = useState<Courthouse[]>([]);
@@ -433,7 +423,7 @@ export default function FindYourCourt() {
                               className="inline-flex items-center gap-2 bg-[#3d8ab8] text-white px-6 py-2 rounded-md hover:bg-[#2d6a8f] transition-colors"
                             >
                               <Link
-                                href={getMainDomain(court.courthouse_page_url)}
+                                href={court.courthouse_page_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                               >

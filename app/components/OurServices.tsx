@@ -1,3 +1,4 @@
+{/* Services Section with more distinctive styling */}
 import { Car, Wine, FileWarning, ShieldAlert } from 'lucide-react';
 
 const services = [
@@ -25,36 +26,45 @@ const services = [
 
 export default function OurServices() {
   return (
-    <section className="m-4 sm:m-6 md:mx-auto bg-white border border-gray-200 rounded-2xl drop-shadow-md max-w-7xl mt-12">
-      <div className=" mx-auto max-w-7xl p-8 md:p-12">
+    <section className="mx-4 sm:mx-6 md:mx-auto bg-white rounded-3xl shadow-xl max-w-7xl relative overflow-hidden">
+      {/* Background pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#f8fafc] to-[#f1f5f9] opacity-70"></div>
+
+      {/* Decorative elements */}
+      <div className="absolute top-0 right-0 w-32 h-32 bg-[#50ade4]/10 rounded-full translate-x-16 -translate-y-16"></div>
+      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#50ade4]/5 rounded-full -translate-x-32 translate-y-24"></div>
+
+      <div className="relative mx-auto max-w-7xl p-8 md:p-12">
         <div className="flex flex-col items-start max-w-3xl mb-12">
-          <p className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <span className="px-3 py-1 text-[#50ade4] bg-[#50ade4]/10 rounded-full text-sm font-medium mb-4">LEGAL SERVICES</span>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Don&apos;t Trust Yourself? Trust Us Instead
-          </p>
-          <h2 className="text-lg text-gray-600">
-            Expert legal services for California drivers facing:
           </h2>
+          <p className="text-lg text-gray-600">
+            Expert legal services for California drivers facing:
+          </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (
             <div
               key={index}
-              className="group relative overflow-hidden rounded-2xl  "
+              className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl border border-gray-100 overflow-hidden"
             >
-              <div className="absolute top-0 left-0 h-1 w-full bg-[#50ade4] transform origin-left scale-x-0 transition-transform group-hover:scale-x-100" />
+              <div className="h-2 bg-[#50ade4]"></div>
               <div className="p-6">
-                <div className="flex flex-row align-center items-center gap-4 mb-4">
-                <h3 className="text-xl font-bold text-gray-900">
-                  {service.title}
-                </h3>
-                  <service.icon className="h-8 w-8 text-[#50ade4]" />
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-2.5 bg-[#50ade4]/10 rounded-lg">
+                    <service.icon className="h-6 w-6 text-[#50ade4]" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900">
+                    {service.title}
+                  </h3>
                 </div>
                 <p className="text-gray-600">
                   {service.description}
                 </p>
               </div>
-              <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#50ade4]/50 to-transparent" />
             </div>
           ))}
         </div>

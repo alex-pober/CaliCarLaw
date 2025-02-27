@@ -11,7 +11,7 @@ export default function Home() {
     <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-gradient-to-b from-transparent to-[#50ade4]/10">
       <Navbar />
       <main className="flex flex-col">
-        <div className="p-8 sm:p-12 md:p-16 lg:p-20">
+        <div className="p-2 sm:p-12 md:p-16 lg:p-20">
           <div className="mt-0 sm:mt-16 relative flex flex-row items-center max-w-7xl mx-auto">
             {/* Right side - Lady of Justice Image */}
             <div className="absolute right-0 w-full md:w-[60%] aspect-square max-w-[600px] opacity-20 lg:opacity-100">
@@ -30,10 +30,10 @@ export default function Home() {
                 Your Trusted Legal Team for{" "}
                 <span className="text-[#50ade4] inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] overflow-hidden">
                   <ul className="block animate-text-slide-4 text-left leading-tight [&_li]:block">
-                    <li>Car Accidents</li>
-                    <li>DUI</li>
-                    <li>Traffic Tickets</li>
-                    <li>Lemon Law</li>
+                    <li className="whitespace-nowrap block">Car Accidents</li>
+                    <li className="whitespace-nowrap block">DUI</li>
+                    <li className="whitespace-nowrap block">Traffic Tickets</li>
+                    <li className="whitespace-nowrap block">Lemon Law</li>
                     <li aria-hidden="true">Car Accidents</li>
                   </ul>
                 </span>
