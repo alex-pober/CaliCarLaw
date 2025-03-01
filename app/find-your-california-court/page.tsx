@@ -299,46 +299,46 @@ export default function FindYourCourt() {
                   {courts.map((court) => (
                     <Card
                       key={court.id}
-                      className="border-l-4 border-l-[#50ade4] hover:shadow-lg transition-shadow"
+                      className="border-l-4 border-l-[#50ade4] hover:shadow-lg transition-shadow overflow-hidden"
                     >
-                      <CardHeader className="pb-2">
-                        <h2 className="text-2xl font-bold text-[#50ade4] md:text-3xl">
+                      <CardHeader className="pb-2 bg-gradient-to-r from-[#f8fbfd] to-white">
+                        <h2 className="text-2xl font-bold text-[#3d8ab8] md:text-3xl">
                           {court.courthouse_name}
                         </h2>
                       </CardHeader>
-                      <CardContent className="text-black">
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <CardContent className="text-black p-0">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
                           {/* Basic Information Section */}
-                          <div className="space-y-3">
-                            <div className="flex flex-col space-y-2">
-                              <p className="flex flex-col sm:flex-row sm:items-center gap-2">
-                                <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                                  <MapPin className="h-4 w-4 text-[#50ade4]" />
+                          <div className="space-y-4">
+                            <div className="flex flex-col space-y-3 bg-white rounded-md">
+                              <p className="flex flex-col sm:flex-row sm:items-start gap-2">
+                                <span className="font-semibold min-w-[100px] flex items-center gap-2 text-[#3d8ab8]">
+                                  <MapPin className="h-4 w-4 text-[#50ade4] flex-shrink-0" />
                                   Address:
                                 </span>
-                                <span>{court.address}</span>
+                                <span className="text-gray-700">{court.address}</span>
                               </p>
-                              <p className="flex flex-col sm:flex-row sm:items-center gap-2">
-                                <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                                  <Phone className="h-4 w-4 text-[#50ade4]" />
+                              <p className="flex flex-col sm:flex-row sm:items-start gap-2">
+                                <span className="font-semibold min-w-[100px] flex items-center gap-2 text-[#3d8ab8]">
+                                  <Phone className="h-4 w-4 text-[#50ade4] flex-shrink-0" />
                                   Phone:
                                 </span>
-                                <span>{court.phone_number}</span>
+                                <span className="text-gray-700">{court.phone_number}</span>
                               </p>
-                              <p className="flex flex-col sm:flex-row sm:items-center gap-2">
-                                <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                                  <Building2 className="h-4 w-4 text-[#50ade4]" />
+                              <p className="flex flex-col sm:flex-row sm:items-start gap-2">
+                                <span className="font-semibold min-w-[100px] flex items-center gap-2 text-[#3d8ab8]">
+                                  <Building2 className="h-4 w-4 text-[#50ade4] flex-shrink-0" />
                                   County:
                                 </span>
-                                <span>{court.county}</span>
+                                <span className="text-gray-700">{court.county}</span>
                               </p>
                               {court.matters_served && (
-                                <p className="flex flex-col sm:flex-row sm:items-center gap-2">
-                                  <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                                    <FileText className="h-4 w-4 text-[#50ade4]" />
+                                <p className="flex flex-col sm:flex-row sm:items-start gap-2">
+                                  <span className="font-semibold min-w-[100px] flex items-center gap-2 text-[#3d8ab8]">
+                                    <FileText className="h-4 w-4 text-[#50ade4] flex-shrink-0" />
                                     Matters:
                                   </span>
-                                  <span>{court.matters_served}</span>
+                                  <span className="text-gray-700">{court.matters_served}</span>
                                 </p>
                               )}
                             </div>
@@ -347,24 +347,24 @@ export default function FindYourCourt() {
                             {((court.parking && court.parking !== "N/A") ||
                               (court.transportation &&
                                 court.transportation !== "N/A")) && (
-                              <div className="space-y-2 pt-4 border-t">
+                              <div className="space-y-3 pt-4 border-t border-gray-100">
                                 {court.parking && court.parking !== "N/A" && (
                                   <p className="flex flex-col sm:flex-row sm:items-start gap-2">
-                                    <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                                      <Car className="h-4 w-4 text-[#50ade4]" />
+                                    <span className="font-semibold min-w-[100px] flex items-center gap-2 text-[#3d8ab8]">
+                                      <Car className="h-4 w-4 text-[#50ade4] flex-shrink-0" />
                                       Parking:
                                     </span>
-                                    <span>{court.parking}</span>
+                                    <span className="text-gray-700">{court.parking}</span>
                                   </p>
                                 )}
                                 {court.transportation &&
                                   court.transportation !== "N/A" && (
                                     <p className="flex flex-col sm:flex-row sm:items-start gap-2">
-                                      <span className="font-semibold min-w-[100px] flex items-center gap-2">
-                                        <Bus className="h-4 w-4 text-[#50ade4]" />
+                                      <span className="font-semibold min-w-[100px] flex items-center gap-2 text-[#3d8ab8]">
+                                        <Bus className="h-4 w-4 text-[#50ade4] flex-shrink-0" />
                                         Transit:
                                       </span>
-                                      <span>{court.transportation}</span>
+                                      <span className="text-gray-700">{court.transportation}</span>
                                     </p>
                                   )}
                               </div>
@@ -372,42 +372,42 @@ export default function FindYourCourt() {
                           </div>
 
                           {/* Hours Section */}
-                          <div className="space-y-4 ">
+                          <div className="space-y-4">
                             {(court.hours_building ||
                               court.hours_clerk ||
                               court.hours_self_help) && (
-                              <div className="bg-gray-50 p-4 rounded-md">
+                              <div className="bg-[#f8fbfd] p-4 rounded-md shadow-sm">
                                 {court.hours_building && (
                                   <div className="mb-4">
-                                    <h3 className="font-semibold text-[#50ade4] mb-2 flex items-center gap-2">
-                                      <Clock className="h-4 w-4" />
+                                    <h3 className="font-semibold text-[#3d8ab8] mb-2 flex items-center gap-2">
+                                      <Clock className="h-4 w-4 flex-shrink-0" />
                                       Building Hours
                                     </h3>
-                                    <pre className="whitespace-pre-line text-sm">
+                                    <div className="whitespace-pre-line text-sm text-gray-700 pl-6">
                                       {formatHours(court.hours_building)}
-                                    </pre>
+                                    </div>
                                   </div>
                                 )}
                                 {court.hours_clerk && (
                                   <div className="mb-4">
-                                    <h3 className="font-semibold text-[#50ade4] mb-2 flex items-center gap-2">
-                                      <Clock className="h-4 w-4" />
+                                    <h3 className="font-semibold text-[#3d8ab8] mb-2 flex items-center gap-2">
+                                      <Clock className="h-4 w-4 flex-shrink-0" />
                                       Clerk Hours
                                     </h3>
-                                    <pre className="whitespace-pre-line text-sm">
+                                    <div className="whitespace-pre-line text-sm text-gray-700 pl-6">
                                       {formatHours(court.hours_clerk)}
-                                    </pre>
+                                    </div>
                                   </div>
                                 )}
                                 {court.hours_self_help && (
                                   <div>
-                                    <h3 className="font-semibold text-[#50ade4] mb-2 flex items-center gap-2">
-                                      <Clock className="h-4 w-4" />
+                                    <h3 className="font-semibold text-[#3d8ab8] mb-2 flex items-center gap-2">
+                                      <Clock className="h-4 w-4 flex-shrink-0" />
                                       Self-Help Hours
                                     </h3>
-                                    <pre className="whitespace-pre-line text-sm">
+                                    <div className="whitespace-pre-line text-sm text-gray-700 pl-6">
                                       {formatHours(court.hours_self_help)}
-                                    </pre>
+                                    </div>
                                   </div>
                                 )}
                               </div>
@@ -416,48 +416,55 @@ export default function FindYourCourt() {
                         </div>
 
                         {/* Additional Information Section */}
-                        <div className="mt-6 gap-4 pt-4 border-t flex flex-row">
-                          {court.courthouse_page_url && (
-                            <Button
-                              asChild
-                              className="inline-flex items-center gap-2 bg-[#3d8ab8] text-white px-6 py-2 rounded-md hover:bg-[#2d6a8f] transition-colors"
-                            >
-                              <Link
-                                href={court.courthouse_page_url}
-                                target="_blank"
-                                rel="noopener noreferrer"
+                        <div className="mt-2 pt-4 border-t border-gray-100 bg-white">
+                          <div className="grid grid-cols-1 gap-4 p-4">
+                            {court.courthouse_page_url && (
+                              <Button
+                                asChild
+                                className="p-0 bg-[#3d8ab8] hover:bg-[#2d6a8f] text-white rounded-md shadow-sm hover:shadow transition-all duration-200 w-full overflow-hidden h-auto"
                               >
-                                {" "}
-                                Visit Court Website{" "}
-                                <ExternalLink className="h-4 w-4" />
-                              </Link>
-                            </Button>
-                          )}
-
-                          {/* Custom Buttons */}
-                          {court.custom_button &&
-                            court.custom_button.length > 0 && (
-                              <div className="flex flex-wrap gap-2">
-                                {court.custom_button.map((button, index) => (
-                                  <Button
-                                    asChild
-                                    key={index}
-                                    className="inline-flex items-center gap-2 bg-[#3d8ab8] text-white px-6 py-2 rounded-md hover:bg-[#2d6a8f] transition-colors"
-                                  >
-                                    <Link
-                                      href={button.url}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                    >
-                                      {button.label}
-                                    </Link>
-                                  </Button>
-                                ))}
-                              </div>
+                                <Link
+                                  href={court.courthouse_page_url}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="w-full h-full flex items-center justify-center p-3"
+                                >
+                                  <div className="flex flex-col items-center text-center">
+                                    <div className="text-sm md:text-base whitespace-normal break-words">Visit Court Website</div>
+                                  </div>
+                                  <ExternalLink className="h-4 w-4 flex-shrink-0" />
+                                </Link>
+                              </Button>
                             )}
+
+                            {/* Custom Buttons */}
+                            {court.custom_button &&
+                              court.custom_button.length > 0 && (
+                                <div className={`grid ${court.custom_button.length > 2 ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3' : court.custom_button.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-1'} gap-4 w-full`}>
+                                  {court.custom_button.map((button, index) => (
+                                    <Button
+                                      asChild
+                                      key={index}
+                                      className="p-0 bg-[#3d8ab8] hover:bg-[#2d6a8f] text-white rounded-md shadow-sm hover:shadow transition-all duration-200 w-full overflow-hidden h-auto"
+                                    >
+                                      <Link
+                                        href={button.url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-full h-full flex items-center justify-center p-3"
+                                      >
+                                        <div className="flex flex-col items-center text-center">
+                                          <div className="text-sm md:text-base whitespace-normal break-words">{button.label}</div>
+                                        </div>
+                                      </Link>
+                                    </Button>
+                                  ))}
+                                </div>
+                              )}
+                          </div>
                         </div>
                         {court.more_info && (
-                          <div className="prose prose-sm max-w-none">
+                          <div className="prose prose-sm max-w-none p-4 pt-0">
                             <MarkdownRenderer content={court.more_info} />
                           </div>
                         )}
