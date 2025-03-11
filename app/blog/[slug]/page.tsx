@@ -1,11 +1,24 @@
 import { Suspense } from "react";
 import { notion } from "@/notion";
 import { NotionPage } from "@/app/components/notion/index";
-import { fetchBySlug } from "@/lib/notion";
+import { fetchBySlug, fetchPages } from "@/lib/notion";
 import { BlogPost } from '@/types/blog';
 import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
 import { Metadata } from 'next';
 import { generateBlogPostSchema } from './structured-data';
+
+// Set revalidation period
+export const revalidate = 86400; // 24 hours
+
+// Pre-render the most recent posts at build time
+export async function generateStaticParams() {
+  const data = await fetchPages();
+  const recentPosts = data.results.slice(0, 10);
+
+  return recentPosts.map((post) => ({
+    slug: post.properties.Slug.rich_text[0]?.plain_text || '',
+  }));
+}
 
 async function getBlogPost(params: Promise<{ slug: string }>) {
   const { slug } = await params;

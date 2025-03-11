@@ -1,13 +1,12 @@
+export const revalidate = 86400;
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { fetchPages } from '@/lib/notion';
-import { cacheLife } from 'next/dist/server/use-cache/cache-life';
 import Link from 'next/link';
 import { BlogPost } from '@/types/blog';
 
 async function getLivePosts() {
-  // "use cache"
-  // cacheLife('hours')
-  return fetchPages();
+  const posts = await fetchPages();
+  return posts;
 }
 
 export default async function BlogPage() {
