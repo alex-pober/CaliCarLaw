@@ -64,7 +64,7 @@ export async function POST(req: NextRequest) {
             field.setText(value);
             console.log(`✓ Set ${fieldName}`);
           } catch (error) {
-            console.log(`✗ Error setting text field ${fieldName}:`, error.message);
+            console.log(`✗ Error setting text field ${fieldName}:`, error instanceof Error ? error.message : String(error));
           }
         }
       });
@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
             field.uncheck();
           }
         } catch (error) {
-          console.log(`✗ Error setting checkbox ${fieldName}:`, error.message);
+          console.log(`✗ Error setting checkbox ${fieldName}:`, error instanceof Error ? error.message : String(error));
         }
       });
 
