@@ -1,34 +1,34 @@
 {/* Features Section with tech-forward design */}
-import { Server, Zap, Database, LineChart } from 'lucide-react';
+import { Target, Search, FileSearch, Sword } from 'lucide-react';
 
 const features = [
   {
-    icon: Server,
-    title: "Infrastructure-First",
-    description: "Built on enterprise-grade systems that never sleep. Zero downtime, instant access.",
-    metric: "99.9%",
-    metricLabel: "uptime"
+    icon: Target,
+    title: "Pre-Litigation Dominance",
+    description: "We analyze medical records and damage reports faster than adjusters can lie. Inconsistencies exposed instantly.",
+    metric: "&lt;60s",
+    metricLabel: "to catch lies"
   },
   {
-    icon: Zap,
-    title: "Automated Workflows",
-    description: "Manual tasks eliminated. Cases processed in hours, not weeks.",
-    metric: "4.2x",
-    metricLabel: "faster"
+    icon: Search,
+    title: "Document Intelligence",
+    description: "Former developers built tools that read thousands of pages in seconds. We see patterns they miss.",
+    metric: "10x",
+    metricLabel: "faster analysis"
   },
   {
-    icon: Database,
-    title: "Real-Time Tracking",
-    description: "Live case status, instant notifications. Full transparency at every stage.",
-    metric: "24/7",
-    metricLabel: "access"
+    icon: FileSearch,
+    title: "Litigation Warfare",
+    description: "Discovery responses structured with surgical precision. Every document cross-referenced, every contradiction exposed.",
+    metric: "100%",
+    metricLabel: "documented"
   },
   {
-    icon: LineChart,
-    title: "Data-Driven Strategy",
-    description: "Thousands of case outcomes analyzed. Predictive models guide every decision.",
-    metric: "10K+",
-    metricLabel: "cases"
+    icon: Sword,
+    title: "Zero Escape Routes",
+    description: "Insurance companies try to delay, deny, defend. We cut through their playbook with automated counter-strategies.",
+    metric: "NONE",
+    metricLabel: "mercy shown"
   }
 ];
 
@@ -39,13 +39,13 @@ export default function WhyChooseUs() {
         <div className="max-w-3xl mx-auto text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-900 text-white text-xs font-mono tracking-wider rounded border border-gray-700 mb-6">
             <span className="w-1.5 h-1.5 bg-[#50ade4] rounded-full"></span>
-            TECHNICAL INFRASTRUCTURE
+            UNFAIR ADVANTAGE
           </div>
           <h2 className="text-3xl sm:text-4xl font-black mb-4 text-gray-900 tracking-tight">
-            Built Different. Performs Better.
+            They Lie. We Prove It. Game Over.
           </h2>
           <p className="text-gray-600 text-lg">
-            While traditional firms rely on paper files and manual processes, we&apos;ve built a tech stack that delivers results traditional firms can&apos;t match.
+            We&apos;re former software developers who got tired of watching insurance companies win with paperwork delays. So we automated the entire battle.
           </p>
         </div>
 
@@ -87,29 +87,29 @@ export default function WhyChooseUs() {
         {/* Tech Stack Bar */}
         <div className="mt-16 p-6 bg-white border border-gray-200 rounded-lg">
           <div className="text-center mb-6">
-            <div className="text-sm text-gray-500 font-mono uppercase tracking-wider mb-2">Powered By</div>
-            <h3 className="text-xl font-bold text-gray-900">Enterprise Technology Stack</h3>
+            <div className="text-sm text-gray-500 font-mono uppercase tracking-wider mb-2">Our Arsenal</div>
+            <h3 className="text-xl font-bold text-gray-900">Developer-Built Legal Weapons</h3>
           </div>
           <div className="flex flex-wrap justify-center items-center gap-8 text-gray-400">
             <div className="flex items-center gap-2 font-mono text-sm">
               <div className="w-2 h-2 bg-[#50ade4] rounded-full"></div>
-              Cloud Infrastructure
+              Document Cross-Reference Engine
             </div>
             <div className="flex items-center gap-2 font-mono text-sm">
               <div className="w-2 h-2 bg-[#50ade4] rounded-full"></div>
-              Machine Learning
+              Automated Contradiction Finder
             </div>
             <div className="flex items-center gap-2 font-mono text-sm">
               <div className="w-2 h-2 bg-[#50ade4] rounded-full"></div>
-              Automated Processing
+              Medical Record Parser
             </div>
             <div className="flex items-center gap-2 font-mono text-sm">
               <div className="w-2 h-2 bg-[#50ade4] rounded-full"></div>
-              Real-Time Analytics
+              Discovery Response Generator
             </div>
             <div className="flex items-center gap-2 font-mono text-sm">
               <div className="w-2 h-2 bg-[#50ade4] rounded-full"></div>
-              End-to-End Encryption
+              Evidence Timeline Builder
             </div>
           </div>
         </div>
