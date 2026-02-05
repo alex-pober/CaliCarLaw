@@ -11,6 +11,10 @@ const formSchema = z.object({
   name: z.string().min(1, 'Name is required'),
   email: z.string().email('Invalid email address'),
   message: z.string().min(1, 'Message is required'),
+  // Honeypot field - should always be empty
+  website: z.string().max(0, 'Bot detected'),
+  // Timestamp for timing validation
+  _timestamp: z.string().min(1, 'Invalid submission'),
 })
 
 // type ContactFormData = z.infer<typeof formSchema>
@@ -18,11 +22,39 @@ const formSchema = z.object({
 
 export async function submitContactForm(formData: FormData) {
   try {
+    // Validate all fields including honeypot
     const validatedFields = formSchema.parse({
       name: formData.get('name'),
       email: formData.get('email'),
       message: formData.get('message'),
+      website: formData.get('website'), // Honeypot - should be empty
+      _timestamp: formData.get('_timestamp'),
     })
+
+    // Check honeypot - if filled, silently reject (pretend success to bot)
+    if (validatedFields.website && validatedFields.website.length > 0) {
+      console.log('🤖 Bot detected via honeypot:', {
+        email: validatedFields.email,
+        timestamp: new Date().toISOString(),
+      })
+      // Return success to fool the bot
+      return { success: true }
+    }
+
+    // Check timing - submissions under 3 seconds are likely bots
+    const submissionTime = Date.now()
+    const formLoadTime = parseInt(validatedFields._timestamp)
+    const timeDiff = (submissionTime - formLoadTime) / 1000 // seconds
+
+    if (timeDiff < 3) {
+      console.log('🤖 Bot detected via timing (too fast):', {
+        email: validatedFields.email,
+        timeDiff: `${timeDiff}s`,
+        timestamp: new Date().toISOString(),
+      })
+      // Return success to fool the bot
+      return { success: true }
+    }
 
     // Send email notification
     await resend.emails.send({

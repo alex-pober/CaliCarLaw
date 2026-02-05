@@ -1,69 +1,71 @@
-{/* Services Section with more distinctive styling */}
+{/* Services Section - Clean service menu design */}
 import { Car, Wine, FileWarning, ShieldAlert } from 'lucide-react';
 
 const services = [
   {
     icon: Car,
     title: "Car Accidents",
-    description: "From fender benders to major collisions, we've got your back."
+    description: "From fender benders to major collisions, we've got your back.",
   },
   {
     icon: Wine,
     title: "DUI Defense",
-    description: "Don't let one mistake define you, fight your charges today."
+    description: "Don't let one mistake define you, fight your charges today.",
   },
   {
     icon: FileWarning,
     title: "Traffic Tickets",
-    description: "Save your license, reduce fines, and keep your record clean."
+    description: "Save your license, reduce fines, and keep your record clean.",
   },
   {
     icon: ShieldAlert,
     title: "Lemon Law",
-    description: "Bought a bad car? Get the compensation you deserve."
+    description: "Bought a bad car? Get the compensation you deserve.",
   }
 ];
 
 export default function OurServices() {
   return (
-    <section className="mx-4 sm:mx-6 md:mx-auto bg-white rounded-3xl shadow-xl max-w-7xl relative overflow-hidden">
-      {/* Background pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#f8fafc] to-[#f1f5f9] opacity-70"></div>
-
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-32 h-32 bg-[#50ade4]/10 rounded-full translate-x-16 -translate-y-16"></div>
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#50ade4]/5 rounded-full -translate-x-32 translate-y-24"></div>
-
-      <div className="relative mx-auto max-w-7xl p-8 md:p-12">
-        <div className="flex flex-col items-start max-w-3xl mb-12">
-          <span className="px-3 py-1 text-[#50ade4] bg-[#50ade4]/10 rounded-full text-sm font-medium mb-4">LEGAL SERVICES</span>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-            Don&apos;t Trust Yourself? Trust Us Instead
+    <section className="mx-4 sm:mx-6 md:mx-auto max-w-7xl my-16">
+      <div className="mx-auto max-w-7xl">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#50ade4]/10 text-[#50ade4] text-xs font-semibold tracking-wider rounded-full mb-4">
+            PRACTICE AREAS
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 mb-4 tracking-tight">
+            Specialized Legal Services
           </h2>
           <p className="text-lg text-gray-600">
-            Expert legal services for California drivers facing:
+            Expert representation across California's most common legal challenges
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((service, index) => (
             <div
               key={index}
-              className="group bg-white shadow-md hover:shadow-xl transition-all duration-300 rounded-xl border border-gray-100 overflow-hidden"
+              className="group relative bg-gradient-to-br from-white to-gray-50 hover:from-[#50ade4] hover:to-[#3d99d0] p-8 rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:border-transparent"
             >
-              <div className="h-2 bg-[#50ade4]"></div>
-              <div className="p-6">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2.5 bg-[#50ade4]/10 rounded-lg">
-                    <service.icon className="h-6 w-6 text-[#50ade4]" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900">
-                    {service.title}
-                  </h3>
+              {/* Large icon */}
+              <div className="mb-6">
+                <div className="w-16 h-16 bg-[#50ade4]/10 group-hover:bg-white/20 rounded-2xl flex items-center justify-center transition-colors">
+                  <service.icon className="h-8 w-8 text-[#50ade4] group-hover:text-white transition-colors" />
                 </div>
-                <p className="text-gray-600">
-                  {service.description}
-                </p>
+              </div>
+
+              <h3 className="text-2xl font-bold text-gray-900 group-hover:text-white mb-3 transition-colors">
+                {service.title}
+              </h3>
+
+              <p className="text-gray-600 group-hover:text-white/90 text-sm leading-relaxed transition-colors">
+                {service.description}
+              </p>
+
+              {/* Arrow indicator on hover */}
+              <div className="absolute bottom-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
               </div>
             </div>
           ))}

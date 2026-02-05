@@ -18,12 +18,12 @@ const geistMono = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.californiacarlaw.com'),
-  title: "California Car Law | AI-Powered Legal Services for Car Accidents, DUI & Traffic Cases",
-  description: "Expert legal representation across California for car accidents, DUI defense, traffic tickets, and lemon law cases. Available 24/7 with AI-powered efficiency for faster results. Serving all California counties.",
-  keywords: "California car accident lawyer, California DUI attorney, traffic ticket lawyer California, lemon law California, car accident legal services, AI-powered law firm, 24/7 legal help California",
+  title: "California Car Law | Most Technically Advanced Law Firm for Car Accidents, DUI & Traffic Cases",
+  description: "California's most technically advanced law firm. Automated workflows, real-time case tracking, and data-driven strategies for car accidents, DUI defense, traffic tickets, and lemon law. Available 24/7 with enterprise-grade systems.",
+  keywords: "California car accident lawyer, California DUI attorney, traffic ticket lawyer California, lemon law California, tech-forward law firm, automated legal services, 24/7 legal help California, modern law firm",
   openGraph: {
-    title: "California Car Law | AI-Powered Legal Services",
-    description: "Expert legal representation across California for car accidents, DUI defense, traffic tickets, and lemon law cases. Available 24/7 with AI-powered efficiency.",
+    title: "California Car Law | Most Technically Advanced Law Firm",
+    description: "California's most technically advanced law firm. Automated workflows, real-time case tracking, and data-driven strategies. Available 24/7 with enterprise-grade systems.",
     locale: "en_US",
     type: "website",
     siteName: "California Car Law",

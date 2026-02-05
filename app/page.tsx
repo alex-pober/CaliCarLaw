@@ -8,62 +8,113 @@ import ToolsSection from './components/ToolsSection'
 
 export default function Home() {
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-gradient-to-b from-transparent to-[#50ade4]/10">
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-white">
       <Navbar />
       <main className="flex flex-col">
-        <div className="p-2 sm:p-12 md:p-16 lg:p-20">
-          <div className="mt-0 sm:mt-16 relative flex flex-row items-center max-w-7xl mx-auto">
-            {/* Right side - Lady of Justice Image */}
-            <div className="absolute right-0 w-full md:w-[60%] aspect-square max-w-[600px] opacity-20 lg:opacity-100">
-              <Image
-                src="/images/hero/lady-of-justice2.png"
-                alt="Lady of Justice statue symbolizing law and justice"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
+        {/* Hero Section */}
+        <div className="relative overflow-hidden border-b border-gray-200">
+          {/* Tech Grid Background */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(80,173,228,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(80,173,228,0.03)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,black,transparent)]"></div>
 
-            {/* Left side - Text content */}
-            <div className="relative z-10 flex flex-col gap-8 items-center sm:items-start md:max-w-[60%]">
-              <div className="font-extrabold text-5xl [text-wrap:balance]">
-                Your Trusted Legal Team for{" "}
-                <span className="text-[#50ade4] inline-flex flex-col h-[calc(theme(fontSize.5xl)*theme(lineHeight.tight))] overflow-hidden">
-                  <ul className="block animate-text-slide-4 text-left leading-tight [&_li]:block">
-                    <li className="whitespace-nowrap block">Car Accidents</li>
-                    <li className="whitespace-nowrap block">DUI</li>
-                    <li className="whitespace-nowrap block">Traffic Tickets</li>
-                    <li className="whitespace-nowrap block">Lemon Law</li>
-                    <li aria-hidden="true">Car Accidents</li>
-                  </ul>
-                </span>
+          {/* Animated Accent Lines */}
+          <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#50ade4] to-transparent animate-[shimmer_3s_ease-in-out_infinite]"></div>
+
+          <div className="p-4 sm:p-12 md:p-16 lg:p-20">
+            <div className="mt-0 sm:mt-12 relative flex flex-row items-center max-w-7xl mx-auto">
+              {/* Right side - Lady of Justice with tech overlay */}
+              <div className="absolute right-0 w-full md:w-[60%] aspect-square max-w-[600px] opacity-10 lg:opacity-30">
+                <Image
+                  src="/images/hero/lady-of-justice2.png"
+                  alt="Lady of Justice statue symbolizing law and justice"
+                  fill
+                  className="object-contain mix-blend-multiply"
+                  priority
+                />
+                {/* Tech overlay effect */}
+                <div className="absolute inset-0 bg-gradient-to-br from-[#50ade4]/5 via-transparent to-blue-500/5"></div>
               </div>
 
-              <p className="text-black font-bold sm:font-medium backdrop-blur-sm rounded-lg  lg:bg-transparent text-lg md:text-xl sm:text-gray-600 dark:text-gray-300 text-center sm:text-left leading-relaxed max-w-sm xl:max-w-xl">
-                Revolutionizing Legal Services with AI-Powered Efficiency,{" "}
-                <span className="text-[#50ade4] font-semibold">
-                  Outperforming Traditional Firms
-                </span>{" "}
-                for Results You Deserve.
-              </p>
+              {/* Left side - Text content */}
+              <div className="relative z-10 flex flex-col gap-6 items-center sm:items-start md:max-w-[65%]">
+                {/* Tech Badge */}
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-900 text-white text-xs font-mono tracking-wider rounded border border-gray-700">
+                  <span className="w-1.5 h-1.5 bg-[#50ade4] rounded-full animate-pulse"></span>
+                  SYSTEM STATUS: OPERATIONAL
+                </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto">
-                <button
-                  onClick={() => {
-                    document
-                      .getElementById("free-consultation")
-                      ?.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      });
-                  }}
-                  className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-[#50ade4] text-white gap-2 hover:bg-[#3d99d0] text-base h-12 px-8 font-medium w-full sm:w-auto"
-                >
-                  Get a Free Case Evaluation
-                </button>
-                <p className="text-sm text-center sm:text-left text-gray-600 dark:text-gray-400">
-                  Available 24/7. Let&apos;s Win Together!
+                <h1 className="font-black text-4xl sm:text-5xl lg:text-6xl [text-wrap:balance] leading-[1.1] tracking-tight">
+                  California&apos;s Most{" "}
+                  <span className="whitespace-nowrap text-transparent bg-clip-text bg-gradient-to-r from-gray-900 via-[#50ade4] to-gray-900">
+                    Technically Advanced
+                  </span>
+                  {" "}Law Firm
+                </h1>
+
+                <p className="text-lg sm:text-xl text-gray-600 text-center sm:text-left leading-relaxed max-w-xl font-medium">
+                  We rebuilt legal practice from the ground up with{" "}
+                  <span className="text-gray-900 font-semibold">automated workflows</span>,{" "}
+                  <span className="text-gray-900 font-semibold">real-time case tracking</span>, and{" "}
+                  <span className="text-gray-900 font-semibold">data-driven strategies</span>.{" "}
+                  <span className="text-[#50ade4] font-bold">Traditional firms can&apos;t compete.</span>
                 </p>
+
+                {/* Tech Metrics */}
+                <div className="grid grid-cols-3 gap-4 w-full max-w-xl mt-2">
+                  <div className="border border-gray-200 bg-white/50 backdrop-blur-sm p-3 rounded-lg">
+                    <div className="text-2xl font-black text-[#50ade4] font-mono">4.2x</div>
+                    <div className="text-xs text-gray-600 font-medium tracking-wide">FASTER PROCESSING</div>
+                  </div>
+                  <div className="border border-gray-200 bg-white/50 backdrop-blur-sm p-3 rounded-lg">
+                    <div className="text-2xl font-black text-[#50ade4] font-mono">24/7</div>
+                    <div className="text-xs text-gray-600 font-medium tracking-wide">SYSTEM UPTIME</div>
+                  </div>
+                  <div className="border border-gray-200 bg-white/50 backdrop-blur-sm p-3 rounded-lg">
+                    <div className="text-2xl font-black text-[#50ade4] font-mono">98%</div>
+                    <div className="text-xs text-gray-600 font-medium tracking-wide">AUTOMATION RATE</div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 items-center w-full sm:w-auto mt-2">
+                  <button
+                    onClick={() => {
+                      document
+                        .getElementById("free-consultation")
+                        ?.scrollIntoView({
+                          behavior: "smooth",
+                          block: "start",
+                        });
+                    }}
+                    className="group relative px-8 h-12 bg-gray-900 text-white font-semibold rounded-lg overflow-hidden transition-all hover:scale-[1.02] active:scale-[0.98] w-full sm:w-auto"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#50ade4] to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <span className="relative z-10 flex items-center justify-center gap-2">
+                      Initialize Case Evaluation
+                      <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                      </svg>
+                    </span>
+                  </button>
+                  <div className="flex items-center gap-2 text-sm text-gray-500 font-mono">
+                    <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    AVAILABLE NOW
+                  </div>
+                </div>
+
+                {/* Services Scroller */}
+                <div className="mt-8 pt-8 border-t border-gray-200">
+                  <div className="text-xs font-mono text-gray-400 uppercase tracking-wider mb-3">Specializing In</div>
+                  <div className="font-black text-3xl sm:text-4xl text-gray-900">
+                    <span className="text-[#50ade4] inline-flex flex-col h-[calc(theme(fontSize.3xl)*theme(lineHeight.tight))] sm:h-[calc(theme(fontSize.4xl)*theme(lineHeight.tight))] overflow-hidden">
+                      <ul className="block animate-text-slide-4 text-left leading-tight [&_li]:block">
+                        <li className="whitespace-nowrap block">Car Accidents</li>
+                        <li className="whitespace-nowrap block">DUI Defense</li>
+                        <li className="whitespace-nowrap block">Traffic Tickets</li>
+                        <li className="whitespace-nowrap block">Lemon Law</li>
+                        <li aria-hidden="true">Car Accidents</li>
+                      </ul>
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

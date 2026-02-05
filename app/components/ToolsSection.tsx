@@ -2,90 +2,69 @@ import { Scale, FileText } from "lucide-react";
 
 export const ToolsSection = () => {
   return (
-    <section className="mx-4 my-8 sm:m-6 md:mx-auto md:my-12 lg:my-16 xl:mt-24 max-w-7xl outline outline-4 outline-[#50ade4]/20 p-4 sm:p-6 rounded-2xl">
-      <div className="text-center space-y-2 mb-4 sm:mb-6 lg:mb-8">
-        <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
-          Basic Legal Things You Can Do
-        </h2>
-        <p className="text-gray-600 text-base sm:text-lg max-w-2xl mx-auto">
-          Simple solutions for common legal needs in California
-        </p>
+    <section className="mx-4 my-8 sm:m-6 md:mx-auto md:my-12 lg:my-16 xl:mt-24 max-w-7xl border-2 border-gray-200 p-6 sm:p-8 rounded-2xl bg-white">
+      {/* Tech header bar */}
+      <div className="flex items-center justify-between mb-8 pb-6 border-b-2 border-gray-200">
+        <div>
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-gray-900 text-white text-xs font-mono tracking-wider rounded border border-gray-700 mb-3">
+            <span className="w-1.5 h-1.5 bg-[#50ade4] rounded-full"></span>
+            SELF-SERVICE TOOLS
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-black text-gray-900 tracking-tight">
+            Automated Legal Resources
+          </h2>
+          <p className="text-gray-600 text-base sm:text-lg mt-2">
+            Instant access to essential legal tools and information
+          </p>
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* CA Courts Directory Card */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#50ade4] to-[#2980b9] rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <svg
-              className="w-full h-full"
-              preserveAspectRatio="none"
-              viewBox="0 0 100% 100%"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <pattern
-                id="grid"
-                width="40"
-                height="40"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M 40 0 L 0 0 0 40"
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="1"
-                />
-              </pattern>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
+        <div className="relative overflow-hidden bg-gray-900 rounded-xl p-6 sm:p-8 border-2 border-gray-800 group hover:border-[#50ade4] transition-all">
+          {/* Status indicator */}
+          <div className="absolute top-4 right-4 flex items-center gap-2 text-xs font-mono text-gray-400">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            ACTIVE
           </div>
-          <div className="relative space-y-3 sm:space-y-4">
-            <h3 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2 sm:gap-3">
-              California Courts Directory{" "}
-              <Scale className="w-[1.2em] h-[1.2em]" />
+
+          <div className="relative space-y-4">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2.5 bg-[#50ade4] rounded-lg">
+                <Scale className="w-6 h-6 text-white" />
+              </div>
+              <div className="font-mono text-sm text-[#50ade4]">TOOL-001</div>
+            </div>
+
+            <h3 className="text-2xl sm:text-3xl font-black text-white">
+              California Courts Directory
             </h3>
 
-            <p className="text-base sm:text-lg text-white/90 min-h-0 sm:min-h-[3rem] md:min-h-[5rem] flex items-center">
-              Stop wasting time digging through California court websites.
-              We&apos;ve compiled all 254 courts to make your life easier.
-              Instantly access:
+            <p className="text-base text-gray-300 leading-relaxed">
+              Direct access to all 254 California courts. No more searching through government websites. Instant lookup for:
             </p>
 
-            <div className="bg-white/10 p-3 sm:p-4 rounded-lg text-white">
-              <ul className="grid gap-3">
-                <li>
-                  <div className="flex items-start">
-                    <span className="text-xl shrink-0 mr-2">✅</span>
-                    <div>
-                      <span className="font-semibold block sm:inline sm:mr-1">
-                        Pay Fines:
-                      </span>
-                      <span>
-                        Quickly settle your traffic violations online.
-                      </span>
-                    </div>
+            <div className="bg-gray-800 border border-gray-700 p-4 rounded-lg">
+              <ul className="grid gap-3 text-sm">
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-[#50ade4] rounded-full mt-2 shrink-0"></div>
+                  <div>
+                    <span className="font-bold text-white">Pay Fines:</span>
+                    <span className="text-gray-300"> Settle violations online instantly</span>
                   </div>
                 </li>
-                <li>
-                  <div className="flex items-start">
-                    <span className="text-xl shrink-0 mr-2">🔹</span>
-                    <div>
-                      <span className="font-semibold block sm:inline sm:mr-1">
-                        Look Up Tickets & Cases:
-                      </span>
-                      <span>Find your tickets online.</span>
-                    </div>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-[#50ade4] rounded-full mt-2 shrink-0"></div>
+                  <div>
+                    <span className="font-bold text-white">Lookup Cases:</span>
+                    <span className="text-gray-300"> Real-time ticket status</span>
                   </div>
                 </li>
-                <li>
-                  <div className="flex items-start">
-                    <span className="text-xl shrink-0 mr-2">⚖️</span>
-                    <div>
-                      <span className="font-semibold block sm:inline sm:mr-1">
-                        Schedule Court Hearings:
-                      </span>
-                      <span>Schedule your court date.</span>
-                    </div>
+                <li className="flex items-start gap-3">
+                  <div className="w-1.5 h-1.5 bg-[#50ade4] rounded-full mt-2 shrink-0"></div>
+                  <div>
+                    <span className="font-bold text-white">Schedule Hearings:</span>
+                    <span className="text-gray-300"> Book court dates directly</span>
                   </div>
                 </li>
               </ul>
@@ -93,11 +72,11 @@ export const ToolsSection = () => {
 
             <a
               href="/find-your-california-court"
-              className="inline-flex items-center gap-2 bg-white text-[#50ade4] hover:bg-gray-100 font-semibold rounded-full px-4 py-2 sm:px-6 sm:py-3 transition-all transform hover:scale-105 group"
+              className="group inline-flex items-center gap-2 bg-[#50ade4] text-white hover:bg-white hover:text-gray-900 font-bold rounded-lg px-6 py-3 transition-all w-full sm:w-auto justify-center"
             >
-              Find Your Local Court
+              Access Directory
               <svg
-                className="w-4 h-4 sm:w-5 sm:h-5 transform transition-transform group-hover:translate-x-1"
+                className="w-4 h-4 transform transition-transform group-hover:translate-x-1"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -106,7 +85,7 @@ export const ToolsSection = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M9 5l7 7-7 7"
+                  d="M13 7l5 5m0 0l-5 5m5-5H6"
                 />
               </svg>
             </a>
@@ -114,91 +93,69 @@ export const ToolsSection = () => {
         </div>
 
         {/* Free Trial by Declaration Card */}
-        <div className="relative overflow-hidden bg-gradient-to-br from-[#2ecc71] to-[#27ae60] rounded-2xl p-4 sm:p-6 lg:p-8 shadow-xl">
-          {/* Background Pattern */}
-          <div className="absolute inset-0 opacity-10">
-            <svg
-              className="w-full h-full"
-              preserveAspectRatio="none"
-              viewBox="0 0 100% 100%"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <pattern
-                id="grid"
-                width="40"
-                height="40"
-                patternUnits="userSpaceOnUse"
-              >
-                <path
-                  d="M 40 0 L 0 0 0 40"
-                  fill="none"
-                  stroke="white"
-                  strokeWidth="1"
-                />
-              </pattern>
-              <rect width="100%" height="100%" fill="url(#grid)" />
-            </svg>
+        <div className="relative overflow-hidden bg-gray-900 rounded-xl p-6 sm:p-8 border-2 border-gray-800 group hover:border-[#22c55e] transition-all">
+          {/* Status indicator */}
+          <div className="absolute top-4 right-4 flex items-center gap-2 text-xs font-mono text-gray-400">
+            <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+            ACTIVE
           </div>
 
-          <div className="relative space-y-3 sm:space-y-4">
-            <h3 className="text-2xl sm:text-3xl font-bold text-white flex items-center gap-2 sm:gap-3">
-              Fight Traffic Ticket for Free{" "}
-              <FileText className="w-[1.2em] h-[1.2em]" />
+          <div className="relative space-y-4">
+            <div className="flex items-center gap-3 mb-2">
+              <div className="p-2.5 bg-[#22c55e] rounded-lg">
+                <FileText className="w-6 h-6 text-white" />
+              </div>
+              <div className="font-mono text-sm text-[#22c55e]">TOOL-002</div>
+            </div>
+
+            <h3 className="text-2xl sm:text-3xl font-black text-white">
+              Fight Traffic Ticket
             </h3>
 
-            <p className="text-base sm:text-lg text-white/90 min-h-0 sm:min-h-[3rem] md:min-h-[5rem] flex items-center">
-              Without marketing fluff, entire ticket defense mostly relies on
-              officer not responding to you fighting the ticket. So fight it!
+            <p className="text-base text-gray-300 leading-relaxed">
+              Most ticket defenses succeed when officers don't respond. Our guide walks you through the process:
             </p>
 
-            <div className="bg-white/10 p-3 sm:p-4 rounded-lg text-white">
-              <ul className="grid gap-3">
-                <li>
-                  <div className="flex items-start">
-                    <span className="text-xl shrink-0 mr-2">📝</span>
-                    <div>
-                      <span className="font-semibold block sm:inline sm:mr-1">
-                        Step 1:
-                      </span>
-                      <span>Get extension on your ticket.</span>
-                    </div>
+            <div className="bg-gray-800 border border-gray-700 p-4 rounded-lg">
+              <ul className="grid gap-3 text-sm">
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded bg-[#22c55e]/20 flex items-center justify-center shrink-0">
+                    <span className="font-mono text-xs text-[#22c55e] font-bold">1</span>
+                  </div>
+                  <div>
+                    <span className="font-bold text-white">Request Extension:</span>
+                    <span className="text-gray-300"> Buy time to prepare your defense</span>
                   </div>
                 </li>
-                <li>
-                  <div className="flex items-start">
-                    <span className="text-xl shrink-0 mr-2">📝</span>
-                    <div>
-                      <span className="font-semibold block sm:inline sm:mr-1">
-                        Step 2:
-                      </span>
-                      <span>
-                        File Trial by Declaration, no response, you win.
-                      </span>
-                    </div>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded bg-[#22c55e]/20 flex items-center justify-center shrink-0">
+                    <span className="font-mono text-xs text-[#22c55e] font-bold">2</span>
+                  </div>
+                  <div>
+                    <span className="font-bold text-white">File TBD:</span>
+                    <span className="text-gray-300"> Officer no-show = automatic win</span>
                   </div>
                 </li>
-                <li>
-                  <div className="flex items-start">
-                    <span className="text-xl shrink-0 mr-2">📄</span>
-                    <div>
-                      <span className="font-semibold block sm:inline sm:mr-1">
-                        Step 3:
-                      </span>
-                      <span>If officer responds, file Trial de Novo</span>
-                    </div>
+                <li className="flex items-start gap-3">
+                  <div className="w-6 h-6 rounded bg-[#22c55e]/20 flex items-center justify-center shrink-0">
+                    <span className="font-mono text-xs text-[#22c55e] font-bold">3</span>
+                  </div>
+                  <div>
+                    <span className="font-bold text-white">Trial de Novo:</span>
+                    <span className="text-gray-300"> If needed, request in-person trial</span>
                   </div>
                 </li>
               </ul>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-2">
+            <div className="flex flex-col gap-3">
               <a
                 href="/blog/fight-traffic-ticket-california-guide"
-                className="inline-flex items-center gap-2 bg-white text-[#22c55e] hover:bg-gray-100 font-semibold rounded-full px-4 py-2 sm:px-6 sm:py-3 transition-all transform hover:scale-105 group"
+                className="group inline-flex items-center gap-2 bg-[#22c55e] text-white hover:bg-white hover:text-gray-900 font-bold rounded-lg px-6 py-3 transition-all w-full sm:w-auto justify-center"
               >
-                Learn how to fight your ticket
+                View Complete Guide
                 <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5 transform transition-transform group-hover:translate-x-1"
+                  className="w-4 h-4 transform transition-transform group-hover:translate-x-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -207,13 +164,13 @@ export const ToolsSection = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M9 5l7 7-7 7"
+                    d="M13 7l5 5m0 0l-5 5m5-5H6"
                   />
                 </svg>
               </a>
 
-              <p className="text-sm sm:text-base text-white/90">
-                This is not legal advice
+              <p className="text-xs text-gray-500 text-center font-mono uppercase tracking-wider">
+                Educational resource - Not legal advice
               </p>
             </div>
           </div>
