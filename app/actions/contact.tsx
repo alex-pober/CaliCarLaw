@@ -64,10 +64,10 @@ export async function submitContactForm(formData: FormData) {
     return { success: true }
   } catch (error) {
     if (error instanceof z.ZodError) {
-      console.log('Validation error details:', JSON.stringify(error.errors, null, 2))
+      console.log('Validation error details:', JSON.stringify(error.issues, null, 2))
       return {
         success: false,
-        errors: error.errors.reduce((acc: Record<string, string>, curr) => {
+        errors: error.issues.reduce((acc: Record<string, string>, curr) => {
           const path = curr.path[0]
           if (typeof path === 'string') {
             acc[path] = curr.message

@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
     // Save the modified PDF
     const modifiedPdfBytes = await pdfDoc.save();
 
-    return new NextResponse(modifiedPdfBytes, {
+    return new NextResponse(Buffer.from(modifiedPdfBytes), {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': 'attachment; filename="Trial-by-Declaration.pdf"',

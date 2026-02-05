@@ -3,7 +3,7 @@ import { notion } from "@/notion";
 import { NotionPage } from "@/app/components/notion/index";
 import { fetchBySlug, fetchPages } from "@/lib/notion";
 import { BlogPost } from '@/types/blog';
-import { PageObjectResponse } from '@notionhq/client/build/src/api-endpoints';
+import { ExtendedRecordMap } from 'notion-types';
 import { Metadata } from 'next';
 import { generateBlogPostSchema } from './structured-data';
 
@@ -87,7 +87,7 @@ async function BlogContent({
   blogPostPromise,
   params,
 }: {
-  blogPostPromise: Promise<{ blog: PageObjectResponse; post: BlogPost }>;
+  blogPostPromise: Promise<{ blog: ExtendedRecordMap; post: BlogPost }>;
   params: Promise<{ slug: string }>;
 }) {
   const { blog, post } = await blogPostPromise;
